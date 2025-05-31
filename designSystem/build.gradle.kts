@@ -1,5 +1,3 @@
-import org.jetbrains.kotlin.commonizer.OptimisticNumberCommonizationEnabledKey.alias
-
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
