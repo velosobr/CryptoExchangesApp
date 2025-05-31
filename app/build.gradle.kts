@@ -10,7 +10,7 @@ android {
 
     defaultConfig {
         applicationId = "com.velosobr.cryptoexchangesapp"
-        minSdk = 24
+        minSdk = 26
         targetSdk = 35
         versionCode = 1
         versionName = "1.0"
@@ -63,7 +63,7 @@ dependencies {
     // Domain
     implementation(project(":domain"))
     // Data
-    //implementation(project(":data"))
+    implementation(project(":data"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
