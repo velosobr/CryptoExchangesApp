@@ -19,6 +19,7 @@ koin = "3.5.0"
 junit-jupiter = "5.10.0"
 mockk = "1.13.8"
 compose-ui = "1.0.0"
+jetbrainsKotlinJvm = "2.0.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -56,3 +57,4 @@ compose-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling", versi
 android-application = { id = "com.android.application", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
+jetbrains-kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "jetbrainsKotlinJvm" }

@@ -11,12 +11,6 @@
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/core" />
-            <option value="$PROJECT_DIR$/data" />
-            <option value="$PROJECT_DIR$/designsystem" />
-            <option value="$PROJECT_DIR$/domain" />
-            <option value="$PROJECT_DIR$/features" />
-            <option value="$PROJECT_DIR$/features/exchange_detail" />
-            <option value="$PROJECT_DIR$/features/exchange_list" />
           </set>
         </option>
         <option name="resolveExternalAnnotations" value="false" />
