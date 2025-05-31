@@ -91,3 +91,7 @@ Para validar a identidade do servidor e mitigar ataques man-in-the-middle.
 Se houver armazenamento local no futuro, será usado EncryptedSharedPreferences ou equivalente com criptografia AES.
 •	Autenticação segura (caso implementada)
 Planeja-se uso de token JWT, OAuth2 ou outras estratégias seguras conforme a necessidade.
+
+🧪 Testes automatizados
+
+Foram implementados testes unitários focando nos casos de uso (`UseCases`) e nas interações com a camada de dados. Utilizamos boas práticas como o padrão AAA (Arrange, Act, Assert), simulação de dependências com Test Doubles via MockK, e cobertura dos fluxos principais de sucesso e falha.

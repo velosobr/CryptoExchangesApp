@@ -103,8 +103,6 @@ dependencies {
     debugImplementation(libs.androidx.ui.test.manifest)
     testImplementation(libs.coroutines.test)
     testImplementation(libs.mockk)
-    testImplementation(libs.junit.jupiter)
-    androidTestImplementation(libs.compose.ui.test.junit4)
     debugImplementation(libs.compose.ui.tooling)
 
 
