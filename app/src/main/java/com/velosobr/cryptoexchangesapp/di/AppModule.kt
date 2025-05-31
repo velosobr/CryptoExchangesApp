@@ -7,5 +7,5 @@ val appModule = module {
 }
 
 class HelloService {
-    fun getMessage(): String = "Hello from Koin!"
+    fun getMessage(): String = "Hello from Koin and apptheme!"
 }

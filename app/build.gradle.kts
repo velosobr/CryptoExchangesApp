@@ -47,9 +47,15 @@ android {
         compose = true
         buildConfig = true
     }
+    composeOptions {
+        kotlinCompilerExtensionVersion = libs.versions.compose.compiler.get()
+    }
 }
 
 dependencies {
+
+    // Design System
+    implementation(project(":designSystem"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)

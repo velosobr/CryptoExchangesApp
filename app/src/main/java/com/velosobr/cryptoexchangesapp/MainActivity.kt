@@ -12,6 +12,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.velosobr.cryptoexchangesapp.di.HelloService
+import com.velosobr.designsystem.theme.AppTheme
 import org.koin.android.ext.android.inject
 
 class MainActivity : ComponentActivity() {
@@ -21,15 +22,17 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            Surface(
-                modifier = Modifier.fillMaxSize(),
-                color = Color.White
-            ) {
-                Text(
-                    text = helloService.getMessage(),
-                    modifier = Modifier.padding(16.dp),
-                    fontSize = 20.sp
-                )
+            AppTheme {
+                Surface(
+                    modifier = Modifier.fillMaxSize()
+                ) {
+                   Text(
+                        text = helloService.getMessage(),
+                        fontSize = 24.sp,
+                        modifier = Modifier
+                            .padding(16.dp),
+                    )
+                }
             }
         }
     }

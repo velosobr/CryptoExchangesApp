@@ -19,7 +19,13 @@ koin = "3.5.0"
 junit-jupiter = "5.10.0"
 mockk = "1.13.8"
 compose-ui = "1.0.0"
+compose-ui-tooling-preview = "1.5.0"
+compose-runtime = "1.5.0"
 jetbrainsKotlinJvm = "2.0.0"
+appcompat = "1.6.1"
+material = "1.10.0"
+compose-compiler = "1.5.10"
+
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -52,9 +58,14 @@ mockk = { group = "io.mockk", name = "mockk", version.ref = "mockk" }
 junit-jupiter = { group = "org.junit.jupiter", name = "junit-jupiter", version.ref = "junit-jupiter" }
 compose-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4", version.ref = "compose-ui" }
 compose-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling", version.ref = "compose-ui" }
+compose-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview", version.ref = "compose-ui-tooling-preview" }
+compose-runtime = { group = "androidx.compose.runtime", name = "runtime", version.ref = "compose-runtime" }
+androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
+material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 jetbrains-kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "jetbrainsKotlinJvm" }
+android-library = { id = "com.android.library", version.ref = "agp" }
