@@ -1,4 +1,5 @@
 package com.velosobr.domain.repository
+
 import com.velosobr.core.result.ExchangeResult
 
 import com.velosobr.domain.model.Exchange
