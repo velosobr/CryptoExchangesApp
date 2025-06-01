@@ -14,17 +14,21 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.velosobr.core.state.UiState
+import com.velosobr.designsystem.components.ErrorBox
 import com.velosobr.designsystem.components.ExchangeCard
 import com.velosobr.designsystem.theme.AppTheme
 import com.velosobr.domain.model.Exchange
 import com.velosobr.exchange_list.model.toCardModel
+import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun ExchangeListScreen(
-    viewModel: ExchangeListViewModel,
     onExchangeClick: (String) -> Unit
 ) {
+    val viewModel: ExchangeListViewModel = koinViewModel()
+
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     ExchangeListContent(uiState = uiState, onExchangeClick = onExchangeClick)
 }
@@ -59,9 +63,10 @@ fun ExchangeListContent(
             }
 
             is UiState.Error -> {
-                Text(
-                    text = "Erro ao carregar exchanges: ${uiState.message}",
-                    modifier = Modifier.align(Alignment.Center)
+                ErrorBox(
+                    title = "Oops! Something went wrong.",
+                    message = uiState.message,
+                    onRetry = { }
                 )
             }
         }
