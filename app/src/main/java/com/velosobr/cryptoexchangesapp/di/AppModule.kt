@@ -6,7 +6,6 @@ import com.velosobr.domain.repository.ExchangeRepository
 import org.koin.dsl.module
 
 val appModule = module {
-    single { HelloService() }
 
     single<ExchangeRepository> {
         ExchangeRepositoryImpl(
@@ -14,8 +13,4 @@ val appModule = module {
             apiKey = BuildConfig.API_KEY
         )
     }
-}
-
-class HelloService {
-    fun getMessage(): String = "Hello from Koin and apptheme!"
 }

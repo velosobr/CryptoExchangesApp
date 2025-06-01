@@ -10,13 +10,9 @@ import androidx.compose.material3.Text
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.velosobr.cryptoexchangesapp.di.HelloService
 import com.velosobr.designsystem.theme.AppTheme
-import org.koin.android.ext.android.inject
 
 class MainActivity : ComponentActivity() {
-
-    private val helloService: HelloService by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,7 +22,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize()
                 ) {
                     Text(
-                        text = helloService.getMessage(),
+                        text = "Hello Exchanges App!",
                         fontSize = 24.sp,
                         modifier = Modifier
                             .padding(16.dp),

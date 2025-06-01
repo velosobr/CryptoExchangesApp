@@ -15,8 +15,8 @@ class ExchangeListViewModel(
     private val getExchangesUseCase: GetExchangesUseCase
 ) : ViewModel() {
 
-    private val _state = MutableStateFlow<UiState<List<Exchange>>>(UiState.Loading)
-    val state: StateFlow<UiState<List<Exchange>>> = _state.asStateFlow()
+    private val _uiState = MutableStateFlow<UiState<List<Exchange>>>(UiState.Loading)
+    val uiState: StateFlow<UiState<List<Exchange>>> = _uiState.asStateFlow()
 
     init {
         fetchExchanges()
@@ -24,9 +24,9 @@ class ExchangeListViewModel(
 
     private fun fetchExchanges() {
         viewModelScope.launch {
-            _state.value = UiState.Loading
+            _uiState.value = UiState.Loading
             val result = getExchangesUseCase()
-            _state.value = when (result) {
+            _uiState.value = when (result) {
                 is ExchangeResult.Success -> UiState.Success(result.data)
                 is ExchangeResult.Error -> UiState.Error(result.exception.message ?: "Erro desconhecido")
             }

@@ -27,7 +27,12 @@ class ExchangeRepositoryImpl(
         }
     }
 
-    override suspend fun getExchangeById(id: String): ExchangeResult<Exchange?> {
-        TODO("Not yet implemented")
+    override suspend fun getExchangeById(id: String): ExchangeResult<Exchange> {
+        return try {
+            val response = api.getExchangeById(id, apiKey)
+            ExchangeResult.Success(response.toDomain())
+        } catch (e: Exception) {
+            ExchangeResult.Error(AppException.Unknown(e))
+        }
     }
 }

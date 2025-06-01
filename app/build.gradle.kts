@@ -64,6 +64,9 @@ dependencies {
     implementation(project(":domain"))
     // Data
     implementation(project(":data"))
+    // Features
+    implementation(project(":feature:exchange_list"))
+    implementation(project(":feature:exchange_detail"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
