@@ -30,13 +30,16 @@ fun ExchangeListScreen(
     val viewModel: ExchangeListViewModel = koinViewModel()
 
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
-    ExchangeListContent(uiState = uiState, onExchangeClick = onExchangeClick)
+    ExchangeListContent(uiState = uiState, onExchangeClick = onExchangeClick, onRetryClick = {
+        viewModel.fetchExchanges()
+    })
 }
 
 @Composable
 fun ExchangeListContent(
     uiState: UiState<List<Exchange>>,
-    onExchangeClick: (String) -> Unit
+    onExchangeClick: (String) -> Unit,
+    onRetryClick: () -> Unit
 ) {
     Box(modifier = Modifier.fillMaxSize()) {
         when (uiState) {
@@ -66,7 +69,10 @@ fun ExchangeListContent(
                 ErrorBox(
                     title = "Oops! Something went wrong.",
                     message = uiState.message,
-                    onRetry = { }
+                    onRetry = {
+                        // Retry logic can be implemented here, e.g., by calling a method in the ViewModel
+                        onRetryClick()
+                    }
                 )
             }
         }
@@ -91,7 +97,7 @@ fun ExchangeListContentPreview() {
             volume1hrsUsd = 100000.0,
             volume1dayUsd = 5000000.0,
             volume1mthUsd = 150000000.0,
-            rank = 1
+            rank = 1.0
         ),
         Exchange(
             exchangeId = "coinbase",
@@ -107,7 +113,7 @@ fun ExchangeListContentPreview() {
             volume1hrsUsd = 50000.0,
             volume1dayUsd = 2000000.0,
             volume1mthUsd = 60000000.0,
-            rank = 2
+            rank = 2.0
         ),
         Exchange(
             exchangeId = "kraken",
@@ -123,14 +129,14 @@ fun ExchangeListContentPreview() {
             volume1hrsUsd = 30000.0,
             volume1dayUsd = 1000000.0,
             volume1mthUsd = 30000000.0,
-            rank = 3
+            rank = 3.0
         )
     )
     AppTheme {
         ExchangeListContent(
             uiState = UiState.Success(fakeData),
-            onExchangeClick = {}
+            onExchangeClick = {},
+            onRetryClick = {}
         )
     }
-
 }

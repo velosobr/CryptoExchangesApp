@@ -1,7 +1,6 @@
 package com.velosobr.data.remote.api
 
 import com.velosobr.data.remote.dto.ExchangeDto
-import com.velosobr.domain.model.Exchange
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.Path

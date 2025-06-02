@@ -5,8 +5,6 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import com.velosobr.cryptoexchangesapp.presentation.navigation.ExchangesApp
 import com.velosobr.designsystem.theme.AppTheme
-import com.velosobr.exchange_list.presentation.ExchangeListViewModel
-import org.koin.androidx.compose.viewModel
 
 class MainActivity : ComponentActivity() {
 

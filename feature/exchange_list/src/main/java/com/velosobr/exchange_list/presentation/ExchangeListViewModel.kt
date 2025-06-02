@@ -22,7 +22,7 @@ class ExchangeListViewModel(
         fetchExchanges()
     }
 
-    private fun fetchExchanges() {
+    fun fetchExchanges() {
         viewModelScope.launch {
             _uiState.value = UiState.Loading
             val result = getExchangesUseCase()

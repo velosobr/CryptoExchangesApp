@@ -1,9 +1,17 @@
+import java.util.Properties
+import java.io.FileInputStream
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
 }
 
+val localProperties = Properties().apply {
+    load(FileInputStream(rootProject.file("local.properties")))
+}
+
+val coinApiKey = localProperties["COIN_API_KEY"] as String
 android {
     namespace = "com.velosobr.cryptoexchangesapp"
     compileSdk = 35
@@ -25,13 +33,13 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
-            buildConfigField("String", "API_KEY", "\"${project.findProperty("COIN_API_KEY")}\"")
+            buildConfigField("String", "API_KEY", "\"$coinApiKey\"")
 
         }
         debug {
             applicationIdSuffix = ".debug"
             versionNameSuffix = "-debug"
-            buildConfigField("String", "API_KEY", "\"${project.findProperty("COIN_API_KEY")}\"")
+            buildConfigField("String", "API_KEY", "\"$coinApiKey\"")
 
         }
 
@@ -96,6 +104,9 @@ dependencies {
     // Koin
     implementation(libs.koin.android)
     implementation(libs.koin.androidx.compose)
+
+    //Log
+    implementation(libs.timber)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

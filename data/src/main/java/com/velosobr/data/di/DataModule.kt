@@ -1,13 +1,22 @@
 package com.velosobr.data.di
 
+import com.velosobr.cryptoexchangesapp.data.BuildConfig
 import com.velosobr.data.remote.api.CoinApiService
+import com.velosobr.data.remote.interceptor.LoggingInterceptor
+import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 
 val dataModule = module {
-
+    factory {
+        OkHttpClient.Builder().apply {
+            if (BuildConfig.DEBUG) {
+                addInterceptor(LoggingInterceptor())
+            }
+        }.build()
+    }
     single {
         Retrofit.Builder()
             .baseUrl("https://rest.coinapi.io/")

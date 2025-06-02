@@ -84,9 +84,36 @@ Não há uso de SharedPreferences, banco de dados ou cache persistente neste MVP
 • Módulo core com Result, UiState e outras proteções estruturais
 Reduz chances de crashes e comportamentos inesperados.
 
+🧰Módulo de Data – Configuração de Rede
+
+Implementei a camada de rede utilizando Retrofit com Moshi como conversor de JSON, integrando com a CoinAPI. Para a gestão das chamadas HTTP, configurei um OkHttpClient customizado que inclui um interceptor de logging durante o build de debug.
+
+Decidi utilizar o Timber como solução de logging por ser leve, extensível e ideal para ambientes Android. O interceptor registra os detalhes das requisições e respostas, além do tempo de execução de cada chamada, o que facilita bastante a depuração durante o desenvolvimento:
+
+Tomei o cuidado de restringir esse tipo de logging apenas ao ambiente de desenvolvimento para garantir segurança e conformidade com diretrizes como o OWASP Top Ten, evitando vazamento de dados sensíveis em produção.
+
+Essa abordagem mantém a camada de data desacoplada, testável e alinhada aos princípios da Clean Architecture.
+
+No projeto CryptoExchangesApp, optei por transformar o módulo data em um módulo Android (android-library) para permitir o uso de bibliotecas como Retrofit, Timber e outras que exigem o plugin Android.
+
+Apesar disso, mantenho a proteção da arquitetura seguindo os princípios da Clean Architecture e boas práticas de encapsulamento.
+
+✅ Estratégias adotadas:
+•	Exposição mínima:
+Somente as implementações de interfaces de repositórios são públicas (por exemplo, ExchangeRepositoryImpl).
+Todo o restante – como DTOs, APIs Retrofit, mapeadores e utilitários – são marcados como internal, evitando o uso indevido por outros módulos.
+•	Separação por responsabilidades:
+O módulo data possui pacotes organizados como repository/, remote/, mapper/ e di/, facilitando a manutenção e o controle de visibilidade.
+•	Injeção controlada:
+Todas as dependências do data são expostas exclusivamente via arquivo DataModule.kt, utilizando o Koin como injetor de dependências.
+•	Segurança e qualidade:
+Essa abordagem impede que outras partes do app (como UI ou app) tenham acesso direto a detalhes de implementação da camada de dados, garantindo uma arquitetura limpa, testável e de fácil evolução.
+
+Essa decisão ajuda a manter o projeto escalável, sustentável e alinhado com práticas modernas utilizadas em grandes empresas.
 ⸻
 
 ⚠️ Melhorias planejadas para versões futuras:
+• Criação de um modulo para Centralização de Dependências tendo em vista. 
 • Obfuscação com Proguard/R8
 Para evitar engenharia reversa em produção e proteger lógica crítica e strings sensíveis.
 • Remoção de logs de debug em builds de produção
