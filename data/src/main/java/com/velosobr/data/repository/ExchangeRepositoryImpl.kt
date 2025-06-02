@@ -17,7 +17,6 @@ class ExchangeRepositoryImpl(
 ) : ExchangeRepository {
 
     override suspend fun getExchanges(): ExchangeResult<List<Exchange>> {
-        Log.e("DEBUG_API", "🔐 API KEY sendo usada: $apiKey")
         return try {
             val exchanges = api.getExchanges(apiKey).map { it.toDomain() }
             Timber.d("Fetched ${exchanges.size} exchanges")
@@ -25,7 +24,6 @@ class ExchangeRepositoryImpl(
         } catch (e: IOException) {
             ExchangeResult.Error(AppException.Network)
         } catch (e: HttpException) {
-            Log.e("DEBUG_API", "🔐 API KEY sendo usada: $apiKey")
             Timber.e(e, "Failed to fetch exchanges")
             ExchangeResult.Error(AppException.Api(code = e.code(), message = e.message()))
         } catch (e: Exception) {
@@ -37,8 +35,17 @@ class ExchangeRepositoryImpl(
     override suspend fun getExchangeById(id: String): ExchangeResult<Exchange> {
         return try {
             val response = api.getExchangeById(id, apiKey)
-            ExchangeResult.Success(response.toDomain())
+            ExchangeResult.Success(
+                response.firstOrNull()?.toDomain() ?: throw AppException.NotFound("Exchange with ID $id not found")
+            )
+        } catch (e: IOException) {
+            Timber.e(e, "Network error while fetching exchange by ID: $id")
+            ExchangeResult.Error(AppException.Network)
+        } catch (e: HttpException) {
+            Timber.e(e, "API error while fetching exchange by ID: $id")
+            ExchangeResult.Error(AppException.Api(code = e.code(), message = e.message()))
         } catch (e: Exception) {
+            Timber.e(e, "Unknown error while fetching exchange by ID: $id")
             ExchangeResult.Error(AppException.Unknown(e))
         }
     }

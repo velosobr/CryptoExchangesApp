@@ -14,5 +14,5 @@ interface CoinApiService {
     suspend fun getExchangeById(
         @Path("exchange_id") id: String,
         @Query("apikey") apiKey: String
-    ): ExchangeDto
+    ): List<ExchangeDto>
 }

@@ -1,17 +1,29 @@
 package com.velosobr.exchange_detail.presentation
 
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.material3.*
-import androidx.compose.runtime.*
+import androidx.compose.material.icons.filled.Clear
+import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.velosobr.core.state.UiState
 import com.velosobr.designsystem.components.ErrorBox
+import com.velosobr.designsystem.theme.DSColor
 import com.velosobr.exchange_detail.components.ExchangeHeader
 import com.velosobr.exchange_detail.components.ExchangeInfoRow
 import com.velosobr.exchange_detail.components.ExchangeSection
@@ -32,8 +44,10 @@ fun ExchangeDetailScreen(
         is UiState.Error -> ErrorBox(
             title = "Oops! Something went wrong.",
             message = (state as UiState.Error).message,
+            image = Icons.Default.Clear,
             onRetry = { viewModel.fetchExchangeDetail() }
         )
+
         is UiState.Success -> {
             val model = (state as UiState.Success).data
             ExchangeDetailContent(model, onBackClick)
@@ -45,11 +59,13 @@ fun ExchangeDetailScreen(
 private fun ExchangeDetailContent(model: ExchangeDetailModel, onBackClick: () -> Unit) {
     Column(
         modifier = Modifier
+            .fillMaxSize()
+            .background(DSColor.DarkBackground)
             .verticalScroll(rememberScrollState())
             .padding(16.dp)
     ) {
         IconButton(onClick = onBackClick) {
-            Icon(Icons.Default.ArrowBack, contentDescription = "Back")
+            Icon(Icons.Default.ArrowBack, contentDescription = "Back", tint = DSColor.OnPrimary)
         }
 
         ExchangeHeader(model)

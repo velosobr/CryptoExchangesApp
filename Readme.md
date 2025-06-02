@@ -66,6 +66,8 @@ Também ajuda no trabalho em equipe, pois cada time pode focar em seu módulo se
 acidental.
 É uma prática comum em apps de produção e favorece uma arquitetura limpa e bem definida.”
 
+Neste app, mesmo com os dados da exchange já carregados na lista, optei por criar uma feature separada com GetExchangeByIdUseCase, pois quis simular a presença de dois casos de uso distintos e validar o fluxo completo (repository → usecase → ViewModel → UI) conforme a Clean Architecture. Mas, na prática, se eu estivesse desenvolvendo isso em um produto real, optaria por passar o objeto diretamente para a tela para evitar sobrecarga de rede e manter simplicidade.
+
 🔐 Segurança
 
 Este projeto foi desenvolvido seguindo boas práticas recomendadas pelo OWASP Mobile Top Ten, visando

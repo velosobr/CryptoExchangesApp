@@ -5,16 +5,23 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
+import com.velosobr.designsystem.theme.DSColor.DarkBackground
+import com.velosobr.designsystem.theme.DSColor.DarkPrimary
+import com.velosobr.designsystem.theme.DSColor.DarkSurface
+import com.velosobr.designsystem.theme.DSColor.DarkText
+import com.velosobr.designsystem.theme.DSColor.ErrorColor
+import com.velosobr.designsystem.theme.DSColor.OnError
+import com.velosobr.designsystem.theme.DSColor.OnPrimary
 
 private val DarkColorScheme = darkColorScheme(
     primary = DarkPrimary,
     background = DarkBackground,
     surface = DarkSurface,
-    onPrimary = Color.White,
+    onPrimary = OnPrimary,
     onBackground = DarkText,
     onSurface = DarkText,
     error = ErrorColor,
-    onError = Color.White
+    onError = OnError
 )
 
 @Composable

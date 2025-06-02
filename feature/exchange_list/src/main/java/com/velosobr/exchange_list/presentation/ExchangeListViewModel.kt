@@ -28,7 +28,7 @@ class ExchangeListViewModel(
             val result = getExchangesUseCase()
             _uiState.value = when (result) {
                 is ExchangeResult.Success -> UiState.Success(result.data)
-                is ExchangeResult.Error -> UiState.Error(result.exception.message ?: "Erro desconhecido")
+                is ExchangeResult.Error -> UiState.Error(message = result.exception.message ?: "Erro desconhecido")
             }
         }
     }
