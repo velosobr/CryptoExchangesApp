@@ -16,8 +16,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.velosobr.core.state.UiState
+import com.velosobr.cryptoexchangesapp.data.BuildConfig
 import com.velosobr.designsystem.components.ErrorBox
-import com.velosobr.designsystem.components.ExchangeCard
+import com.velosobr.designsystem.components.DSExchangeCardComponent
 import com.velosobr.designsystem.theme.AppTheme
 import com.velosobr.designsystem.theme.DSColor
 import com.velosobr.designsystem.theme.DSSpacing
@@ -69,18 +70,18 @@ fun ExchangeListContent(
                         contentPadding = PaddingValues(bottom = DSSpacing.xxxl)
                     ) {
                         items(items = exchanges, key = { it.exchangeId }) { exchange ->
-                            val iconUrl = iconMap[exchange.exchangeId] ?: ""
+                            val iconUrl = iconMap[exchange.exchangeId] ?: BuildConfig.DEFAULT_ICON_URL
                             val model = exchange.toCardModel()
 
 
-                            ExchangeCard(
+                            DSExchangeCardComponent(
                                 name = model.name,
                                 id = model.id,
                                 volume = model.volume,
-                                iconUrl = iconUrl ?: "sem imagem",
+                                iconUrl = iconUrl,
                                 onClick = { onExchangeClick(model.id, iconUrl) },
                                 modifier = Modifier
-                                    .padding(horizontal = DSSpacing.md, vertical = DSSpacing.sm)
+                                    .padding(horizontal = DSSpacing.md)
                                     .animateItem(
                                         fadeInSpec = androidx.compose.animation.core.tween(300),
                                         fadeOutSpec = androidx.compose.animation.core.tween(300),

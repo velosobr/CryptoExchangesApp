@@ -8,7 +8,7 @@ object DSColor {
     val Secondary = Color(0xFF03DAC5)
     val Background = Color(0xFFF7F7F7)
 
-    val DarkBackground = Color(0xFF1E1E1E)
+    val DarkBackground = Color(0xFF121417)
     val DarkSurface = Color(0xFF2A2A2A)
     val DarkPrimary = Color(0xFF4E44CE)
     val DarkText = Color(0xFFEDEDED)

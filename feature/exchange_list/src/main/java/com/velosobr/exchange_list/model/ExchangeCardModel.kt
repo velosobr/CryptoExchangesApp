@@ -7,7 +7,6 @@ data class ExchangeCardModel(
     val name: String,
     val id: String,
     val volume: String,
-    val iconUrl: String
 )
 
 fun Exchange.toCardModel(): ExchangeCardModel {
@@ -15,6 +14,5 @@ fun Exchange.toCardModel(): ExchangeCardModel {
         name = name,
         id = exchangeId,
         volume = formatVolume(volume1dayUsd),
-        iconUrl = iconUrl
     )
 }

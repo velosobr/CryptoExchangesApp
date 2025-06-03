@@ -25,7 +25,7 @@ class ExchangeIconRepositoryImpl(
         Timber.d("📡 Ícone não está no cache, buscando via API...")
 
         return try {
-            val icons = api.getExchangeIcons(apiKey = apiKey, size = 32)
+            val icons = api.getExchangeIcons(apiKey = apiKey, size = 64)
             Timber.d("📦 Ícones recebidos da API: ${icons.size}")
 
             val match = icons.firstOrNull { it.exchangeId.equals(exchangeId, ignoreCase = true) }

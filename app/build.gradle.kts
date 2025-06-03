@@ -88,6 +88,7 @@ dependencies {
     implementation(libs.androidx.activity.compose)
     implementation(libs.navigation.compose)
     implementation(libs.lifecycle.runtime.compose)
+    implementation(libs.accompanist.navigation.animation)
 
     // Coroutines
     implementation(libs.coroutines.android)
