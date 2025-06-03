@@ -20,15 +20,17 @@ Construir um app Android robusto, modularizado e orientado a boas práticas de e
 
 ## 📦 Estrutura do Projeto
 
+```
 exchanges-app/
-├── app/                # Navegação, DI, ponto de entrada do app
-├── core/               # Result, UiState, AppException
-├── designsystem/       # Botões, tema, espaçamentos e componentes visuais
-├── domain/             # Entidades e casos de uso
-├── data/               # Retrofit, Repositories, Mappers, DTOs
-└── features/           # Funcionalidades da aplicação
-├── exchange_list/      # Tela de listagem de exchanges
-└── exchange_detail/    # Tela de detalhes de uma exchange
+├── app/              # Navegação, DI, ponto de entrada do app
+├── core/             # Result, UiState, AppException
+├── designsystem/     # Botões, tema, espaçamentos e componentes visuais
+├── domain/           # Entidades e casos de uso
+├── data/             # Retrofit, Repositories, Mappers, DTOs
+└── features/         # Funcionalidades da aplicação
+    ├── exchange_list/    # Tela de listagem de exchanges
+    └── exchange_detail/  # Tela de detalhes de uma exchange
+```
 ---
 
 ## 🧠 Decisões técnicas
