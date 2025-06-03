@@ -27,7 +27,7 @@ private val DarkColorScheme = darkColorScheme(
 fun AppTheme(content: @Composable () -> Unit) {
     MaterialTheme(
         colorScheme = DarkColorScheme,
-        typography = AppTypography,
+        typography = DSAppTypography,
         content = content
     )
 }

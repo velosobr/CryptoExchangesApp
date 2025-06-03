@@ -26,6 +26,8 @@ class ExchangeDetailViewModel(
     fun fetchExchangeDetail() {
 
         viewModelScope.launch {
+            _uiState.value = UiState.Loading
+
             when (val result = getExchangeByIdUseCase(exchangeId)) {
                 is ExchangeResult.Success -> {
                     result.data?.let {

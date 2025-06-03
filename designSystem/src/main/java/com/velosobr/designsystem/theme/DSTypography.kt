@@ -9,21 +9,33 @@ import androidx.compose.ui.unit.sp
 import com.velosobr.designsystem.R
 
 val WorkSans = FontFamily(
-    Font(R.font.work_sans_regular),
-    Font(R.font.work_sans_bold, FontWeight.Bold),
+    Font(R.font.work_sans_regular, FontWeight.Normal),
+    Font(R.font.work_sans_bold, FontWeight.Bold)
 )
 
-val AppTypography = Typography(
+val DSAppTypography = Typography(
     bodyLarge = TextStyle(
         fontFamily = WorkSans,
-        fontSize = 16.sp
+        fontWeight = FontWeight.Normal,
+        fontSize = 16.sp,
+        lineHeight = 24.sp
+    ),
+    bodyMedium = TextStyle(
+        fontFamily = WorkSans,
+        fontWeight = FontWeight.Normal,
+        fontSize = 14.sp,
+        lineHeight = 20.sp
     ),
     titleLarge = TextStyle(
         fontFamily = WorkSans,
-        fontSize = 20.sp
+        fontWeight = FontWeight.Bold,
+        fontSize = 24.sp,
+        lineHeight = 32.sp
     ),
     headlineMedium = TextStyle(
         fontFamily = WorkSans,
-        fontSize = 24.sp
+        fontWeight = FontWeight.SemiBold,
+        fontSize = 20.sp,
+        lineHeight = 28.sp
     )
 )

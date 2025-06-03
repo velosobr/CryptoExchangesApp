@@ -11,7 +11,6 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.material.icons.filled.Clear
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -61,7 +60,6 @@ fun ExchangeDetailScreen(
                 is UiState.Error -> ErrorBox(
                     title = "Oops! Something went wrong.",
                     message = (state as UiState.Error).message,
-                    image = Icons.Default.Clear,
                     onRetry = { viewModel.fetchExchangeDetail() }
                 )
 

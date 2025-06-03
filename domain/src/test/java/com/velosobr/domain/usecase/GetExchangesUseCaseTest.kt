@@ -2,7 +2,6 @@ package com.velosobr.domain.usecase
 
 import com.velosobr.core.error.AppException
 import com.velosobr.core.result.ExchangeResult
-import com.velosobr.domain.model.Exchange
 import com.velosobr.domain.repository.ExchangeRepository
 import io.mockk.coEvery
 import io.mockk.mockk
@@ -25,8 +24,8 @@ class GetExchangesUseCaseTest {
     @Test
     fun `should return Success when repository returns list of exchanges`() = runTest {
         // Arrange
-        val exchanges =
-            listOf(Exchange(exchangeId = "id", name = "Binance", website = "https://binance.com"))
+        val exchanges = ExchangeFactory.createList(3)
+
         coEvery { repository.getExchanges() } returns ExchangeResult.Success(exchanges)
 
         // Act

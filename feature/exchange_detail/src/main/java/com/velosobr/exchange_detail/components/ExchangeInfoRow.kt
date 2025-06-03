@@ -8,20 +8,20 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
-import com.velosobr.designsystem.theme.AppTypography
+import com.velosobr.designsystem.theme.DSAppTypography
 import com.velosobr.designsystem.theme.DSColor
+import com.velosobr.designsystem.theme.DSSpacing
 
 @Composable
 fun ExchangeInfoRow(label: String, value: String) {
     Column(
         modifier = Modifier
             .background(DSColor.DarkBackground)
-            .padding(vertical = 4.dp)
+            .padding(vertical = DSSpacing.xs)
     ) {
         Text(
             text = label,
-            style = AppTypography.labelSmall,
+            style = DSAppTypography.labelSmall,
             color = DSColor.DarkText.copy(alpha = 0.7f)
         )
         Text(

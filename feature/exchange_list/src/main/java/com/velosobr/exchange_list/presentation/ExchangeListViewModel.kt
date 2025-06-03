@@ -1,6 +1,5 @@
 package com.velosobr.exchange_list.presentation
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.velosobr.core.result.ExchangeResult
@@ -30,19 +29,12 @@ class ExchangeListViewModel(
 
     fun fetchExchanges() {
         viewModelScope.launch {
-            Log.d("ExchangeListViewModel", "Iniciando fetchExchanges")
             _uiState.value = UiState.Loading
-            Log.d("ExchangeListViewModel", "Estado da UI definido como Loading")
 
             val exchanges = getExchangesUseCase()
-            Log.d("ExchangeListViewModel", "Resultado do getExchangesUseCase obtido: $exchanges")
 
             _uiState.value = when (exchanges) {
                 is ExchangeResult.Success -> {
-                    Log.d(
-                        "ExchangeListViewModel",
-                        "ExchangeResult.Success recebido com ${exchanges.data.size} exchanges"
-                    )
 
                     exchanges.data.forEach { exchange ->
                         launch {
@@ -50,19 +42,13 @@ class ExchangeListViewModel(
                             _exchangeIcons.update { it + (exchange.exchangeId to icon) }
                         }
                     }
-                    Log.d("ExchangeListViewModel", "Exchanges com ícones processadas com sucesso")
                     UiState.Success(exchanges.data)
                 }
 
                 is ExchangeResult.Error -> {
-                    Log.e(
-                        "ExchangeListViewModel",
-                        "Erro ao obter exchanges: ${exchanges.exception.message}"
-                    )
                     UiState.Error(message = exchanges.exception.message ?: "Erro desconhecido")
                 }
             }
-            Log.d("ExchangeListViewModel", "Estado da UI atualizado: ${_uiState.value}")
         }
     }
 }

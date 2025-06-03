@@ -64,12 +64,14 @@ dependencies {
     implementation(libs.koin.core)
     implementation(libs.koin.android)
     implementation(libs.koin.androidx.compose)
-    //    implementation(platform(libs.androidx.compose.bom))
 
     debugImplementation(libs.compose.ui.tooling)
 
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
+    testImplementation(libs.turbine)
+    testImplementation(libs.coroutines.test)
+    testImplementation(libs.mockk)
     testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.junit)
+    testImplementation(testFixtures(project(":domain")))
     androidTestImplementation(libs.androidx.espresso.core)
 }
