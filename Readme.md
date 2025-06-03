@@ -21,22 +21,22 @@ Construir um app Android robusto, modularizado e orientado a boas práticas de e
 ## 📦 Estrutura do Projeto
 
 exchanges-app/
-├── app/             # Navegação, DI, ponto de entrada do app
-├── core/            # Result, UiState, AppException
-├── designsystem/    # Botões, tema, espaçamentos e componentes visuais
-├── domain/          # Entidades e casos de uso
-├── data/            # Retrofit, Repositories, Mappers, DTOs
-└── features/
-├── exchange_list/    # Tela de listagem de exchanges
-└── exchange_detail/  # Tela de detalhes de uma exchange
+├── app/                # Navegação, DI, ponto de entrada do app
+├── core/               # Result, UiState, AppException
+├── designsystem/       # Botões, tema, espaçamentos e componentes visuais
+├── domain/             # Entidades e casos de uso
+├── data/               # Retrofit, Repositories, Mappers, DTOs
+└── features/           # Funcionalidades da aplicação
+├── exchange_list/      # Tela de listagem de exchanges
+└── exchange_detail/    # Tela de detalhes de uma exchange
 ---
 
 ## 🧠 Decisões técnicas
 
-| Decisão                            | Justificativa                                              |
-|------------------------------------|-------------------------------------------------------------|
-| Por que modularizar?               | A modularização garante isolamento real de dependências, melhora o tempo de build, facilita testes, permite o desenvolvimento paralelo entre times e mantém limites claros entre camadas.                        |
-| Módulo `data` como android-library | Permitiu uso de Retrofit, Timber e outros com Android plugin |
+| Decisão                            | Justificativa                                             |
+|------------------------------------|------------------------------------------------------------|
+| Por que modularizar?               | A modularização garante isolamento real de dependências, melhora o tempo de build, facilita testes, permite o desenvolvimento paralelo entre times e mantém limites claros entre camadas.                       |
+| Módulo `data` como android-library | Permitiu uso Timber e outros com Android plugin |
 
 ---
 
@@ -67,14 +67,10 @@ O projeto foi estruturado considerando recomendações do OWASP Mobile Top Ten d
 
 - [ ] Criar módulo centralizador de dependências
 - [ ] Obfuscação com R8/Proguard
-- [ ] SSL Pinning (se necessário)
-- [ ] Armazenamento seguro com `EncryptedSharedPreferences` (caso necessário)
-- [ ] Autenticação segura via OAuth2 ou JWT (se necessário)
-- [ ] Remoção de logs de debug em produção
 
 ---
 
-## 🛠️ Camada de Rede
+## 🌐 Camada de Rede
 
 - Retrofit com Moshi (JSON)
 - OkHttp com interceptor de logs
