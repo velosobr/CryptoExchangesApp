@@ -27,20 +27,27 @@ import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun ExchangeListScreen(
-    onExchangeClick: (String) -> Unit
+    onExchangeClick: (String, String) -> Unit
 ) {
     val viewModel: ExchangeListViewModel = koinViewModel()
 
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
-    ExchangeListContent(uiState = uiState, onExchangeClick = onExchangeClick, onRetryClick = {
-        viewModel.fetchExchanges()
-    })
+    val iconMap by viewModel.exchangeIcons.collectAsStateWithLifecycle()
+
+    ExchangeListContent(
+        uiState = uiState,
+        iconMap = iconMap,
+        onExchangeClick = onExchangeClick,
+        onRetryClick = {
+            viewModel.fetchExchanges()
+        })
 }
 
 @Composable
 fun ExchangeListContent(
     uiState: UiState<List<Exchange>>,
-    onExchangeClick: (String) -> Unit,
+    iconMap: Map<String, String?>,
+    onExchangeClick: (String, String) -> Unit,
     onRetryClick: () -> Unit
 ) {
     Scaffold { paddingValues ->
@@ -62,13 +69,16 @@ fun ExchangeListContent(
                         contentPadding = PaddingValues(bottom = DSSpacing.xxxl)
                     ) {
                         items(items = exchanges, key = { it.exchangeId }) { exchange ->
+                            val iconUrl = iconMap[exchange.exchangeId] ?: ""
                             val model = exchange.toCardModel()
+
+
                             ExchangeCard(
                                 name = model.name,
                                 id = model.id,
                                 volume = model.volume,
-                                iconUrl = model.iconUrl,
-                                onClick = { onExchangeClick(model.id) },
+                                iconUrl = iconUrl ?: "sem imagem",
+                                onClick = { onExchangeClick(model.id, iconUrl) },
                                 modifier = Modifier
                                     .padding(horizontal = DSSpacing.md, vertical = DSSpacing.sm)
                                     .animateItem(
@@ -76,6 +86,7 @@ fun ExchangeListContent(
                                         fadeOutSpec = androidx.compose.animation.core.tween(300),
                                     )
                             )
+
                         }
                     }
                 }
@@ -84,9 +95,7 @@ fun ExchangeListContent(
                     ErrorBox(
                         title = "Oops! Something went wrong.",
                         message = uiState.message,
-                        onRetry = {
-                            onRetryClick()
-                        }
+                        onRetry = onRetryClick
                     )
                 }
             }
@@ -98,6 +107,7 @@ fun ExchangeListContent(
 @Composable
 fun ExchangeListContentPreview() {
     val fakeData = listOf(
+
         Exchange(
             exchangeId = "binance",
             website = "https://www.binance.com",
@@ -112,8 +122,10 @@ fun ExchangeListContentPreview() {
             volume1hrsUsd = 100000.0,
             volume1dayUsd = 5000000.0,
             volume1mthUsd = 150000000.0,
-            rank = 1.0
+            rank = 1,
+            iconUrl = "https://s3.eu-central-1.amazonaws.com/bbxt-static-icons/type-id/png_32/74eaad903814407ebdfc3828fe5318ba.png"
         ),
+
         Exchange(
             exchangeId = "coinbase",
             website = "https://www.coinbase.com",
@@ -128,8 +140,10 @@ fun ExchangeListContentPreview() {
             volume1hrsUsd = 50000.0,
             volume1dayUsd = 2000000.0,
             volume1mthUsd = 60000000.0,
-            rank = 2.0
+            rank = 2,
+            iconUrl = "https://s3.eu-central-1.amazonaws.com/bbxt-static-icons/type-id/png_32/54c07e9bf5c140a8ae8d866704a4e393.png"
         ),
+
         Exchange(
             exchangeId = "kraken",
             website = "https://www.kraken.com",
@@ -144,13 +158,21 @@ fun ExchangeListContentPreview() {
             volume1hrsUsd = 30000.0,
             volume1dayUsd = 1000000.0,
             volume1mthUsd = 30000000.0,
-            rank = 3.0
+            rank = 3,
+            iconUrl = "https://example.com/kraken.png"
         )
     )
     AppTheme {
         ExchangeListContent(
             uiState = UiState.Success(fakeData),
-            onExchangeClick = {},
+            iconMap = mapOf(
+                "binance" to "https://s3.eu-central-1.amazonaws.com/bbxt-static-icons/type-id/png_32/74eaad903814407ebdfc3828fe5318ba.png",
+                "coinbase" to "https://s3.eu-central-1.amazonaws.com/bbxt-static-icons/type-id/png_32/54c07e9bf5c140a8ae8d866704a4e393.png",
+                "kraken" to "https://example.com/kraken.png"
+            ),
+            onExchangeClick = { _, _ ->
+                // Handle exchange click
+            },
             onRetryClick = {}
         )
     }

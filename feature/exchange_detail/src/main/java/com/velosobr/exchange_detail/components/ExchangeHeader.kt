@@ -17,7 +17,7 @@ import com.velosobr.designsystem.theme.DSColor
 import com.velosobr.exchange_detail.model.ExchangeDetailModel
 
 @Composable
-fun ExchangeHeader(model: ExchangeDetailModel) {
+fun ExchangeHeader(model: ExchangeDetailModel, iconUrl: String) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
@@ -25,7 +25,7 @@ fun ExchangeHeader(model: ExchangeDetailModel) {
             .background(DSColor.DarkBackground)
     ) {
         AsyncImage(
-            model = model.iconUrl,
+            model = iconUrl,
             contentDescription = model.name,
             modifier = Modifier
                 .size(120.dp)
@@ -53,12 +53,12 @@ fun PreviewExchangeHeader() {
                 exchangeId = "BINANCE",
                 name = "Binance",
                 website = "https://binance.com",
-                dataTradeStart= "2017-01-01",
+                dataTradeStart = "2017-01-01",
                 volume1dayUsd = "$1,000,000",
                 volume1hrsUsd = "$100,000",
                 activePairs = 434,
-                iconUrl = "https://cryptoicons.org/api/icon/binance/200"
-            )
+            ),
+            iconUrl = "https://s3.eu-central-1.amazonaws.com/bbxt-static-icons/type-id/png_32/74eaad903814407ebdfc3828fe5318ba.png"
         )
     }
 }

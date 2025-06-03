@@ -2,7 +2,6 @@ plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.ksp)
-
 }
 
 android {
@@ -11,8 +10,12 @@ android {
 
     defaultConfig {
         minSdk = 26
+        buildConfigField(
+            "String",
+            "DEFAULT_ICON_URL",
+            "\"https://cdn-icons-png.flaticon.com/512/36/36658.png\""
+        )
 
-        buildConfigField("Boolean", "ENABLE_LOGS", "true")
     }
 
     buildTypes {
@@ -40,12 +43,16 @@ android {
 dependencies {
     api(project(":core"))
     api(project(":domain"))
+
     implementation(libs.timber)
     implementation(libs.retrofit)
     implementation(libs.retrofit.converter.moshi)
     implementation(libs.moshi)
     implementation(libs.moshi.kotlin)
     implementation(libs.koin.core)
+    implementation(libs.androidx.datastore.preferences)
+    implementation(libs.kotlinx.serialization.json)
+
     ksp(libs.moshi.codegen)
     testImplementation(libs.junit)
     testImplementation(libs.mockk)

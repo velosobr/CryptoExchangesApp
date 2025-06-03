@@ -1,9 +1,9 @@
 package com.velosobr.data.di
 
 import com.velosobr.cryptoexchangesapp.data.BuildConfig
-import com.velosobr.data.remote.api.CoinApiService
+import com.velosobr.data.remote.api.ExchangeApiService
 import com.velosobr.data.remote.interceptor.LoggingInterceptor
-import okhttp3.Interceptor
+import com.velosobr.domain.usecase.GetExchangeIconUrlUseCase
 import okhttp3.OkHttpClient
 import org.koin.dsl.module
 import retrofit2.Retrofit
@@ -23,6 +23,8 @@ val dataModule = module {
             .addConverterFactory(MoshiConverterFactory.create())
             .client(OkHttpClient.Builder().build())
             .build()
-            .create(CoinApiService::class.java)
+            .create(ExchangeApiService::class.java)
     }
+
+    single { GetExchangeIconUrlUseCase(get()) }
 }

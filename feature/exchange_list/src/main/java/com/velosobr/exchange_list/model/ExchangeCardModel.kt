@@ -15,6 +15,6 @@ fun Exchange.toCardModel(): ExchangeCardModel {
         name = name,
         id = exchangeId,
         volume = formatVolume(volume1dayUsd),
-        iconUrl = "https://cryptoicons.org/api/icon/${exchangeId.lowercase()}/64"
+        iconUrl = iconUrl
     )
 }

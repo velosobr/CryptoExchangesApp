@@ -1,6 +1,6 @@
 import com.velosobr.core.error.AppException
 import com.velosobr.core.result.ExchangeResult
-import com.velosobr.data.remote.api.CoinApiService
+import com.velosobr.data.remote.api.ExchangeApiService
 import com.velosobr.data.remote.dto.ExchangeDto
 import com.velosobr.data.repository.ExchangeRepositoryImpl
 import io.mockk.coEvery
@@ -13,7 +13,7 @@ import org.junit.Test
 
 class ExchangeRepositoryImplTest {
 
-    private val api = mockk<CoinApiService>()
+    private val api = mockk<ExchangeApiService>()
     private val apiKey = "fake-api-key"
     private lateinit var repository: ExchangeRepositoryImpl
 
@@ -40,7 +40,13 @@ class ExchangeRepositoryImplTest {
                 volume1HrsUsd = 0.0,
                 volume1DayUsd = 0.0,
                 volume1MthUsd = 0.0,
-                rank = 1
+                rank = 1,
+                dataStart = TODO(),
+                dataEnd = TODO(),
+                dataTradeCount = TODO(),
+                metricId = TODO(),
+                icons = TODO(),
+                integrationStatus = TODO()
             ),
             ExchangeDto(
                 exchangeId = "binance",
@@ -56,7 +62,13 @@ class ExchangeRepositoryImplTest {
                 volume1HrsUsd = 5000000.0,
                 volume1DayUsd = 100000000.0,
                 volume1MthUsd = 3000000000.0,
-                rank = 1
+                rank = 1,
+                dataStart = TODO(),
+                dataEnd = TODO(),
+                dataTradeCount = TODO(),
+                metricId = TODO(),
+                icons = TODO(),
+                integrationStatus = TODO()
             ),
 
             )

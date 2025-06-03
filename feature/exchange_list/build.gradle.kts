@@ -27,6 +27,7 @@ android {
                 "proguard-rules.pro"
             )
         }
+
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
@@ -63,7 +64,6 @@ dependencies {
     implementation(libs.koin.core)
     implementation(libs.koin.android)
     implementation(libs.koin.androidx.compose)
-    implementation("androidx.compose.foundation:foundation:1.8.2")
     //    implementation(platform(libs.androidx.compose.bom))
 
     debugImplementation(libs.compose.ui.tooling)

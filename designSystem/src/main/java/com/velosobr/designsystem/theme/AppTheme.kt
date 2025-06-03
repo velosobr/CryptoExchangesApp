@@ -4,7 +4,6 @@ package com.velosobr.designsystem.theme
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.graphics.Color
 import com.velosobr.designsystem.theme.DSColor.DarkBackground
 import com.velosobr.designsystem.theme.DSColor.DarkPrimary
 import com.velosobr.designsystem.theme.DSColor.DarkSurface

@@ -3,7 +3,7 @@ package com.velosobr.designsystem.theme
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 
-object DSColor{
+object DSColor {
     val Primary = Color(0xFF4E44CE)
     val Secondary = Color(0xFF03DAC5)
     val Background = Color(0xFFF7F7F7)

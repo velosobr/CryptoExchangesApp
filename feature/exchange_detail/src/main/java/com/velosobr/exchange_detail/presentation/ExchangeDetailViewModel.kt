@@ -22,6 +22,7 @@ class ExchangeDetailViewModel(
     init {
         fetchExchangeDetail()
     }
+
     fun fetchExchangeDetail() {
 
         viewModelScope.launch {
@@ -31,7 +32,9 @@ class ExchangeDetailViewModel(
                         _uiState.value = UiState.Success(it.toDetailModel())
                     } ?: run {
                         _uiState.value = UiState.Error("Exchange not found")
-                    }                }
+                    }
+                }
+
                 is ExchangeResult.Error -> {
                     _uiState.value = UiState.Error(result.exception.message ?: "Unknown error")
                 }

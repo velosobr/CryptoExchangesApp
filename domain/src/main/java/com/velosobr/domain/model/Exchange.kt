@@ -16,5 +16,6 @@ data class Exchange(
     val volume1hrsUsd: Double,
     val volume1dayUsd: Double,
     val volume1mthUsd: Double,
-    val rank: Double
+    val rank: Int,
+    val iconUrl: String
 )

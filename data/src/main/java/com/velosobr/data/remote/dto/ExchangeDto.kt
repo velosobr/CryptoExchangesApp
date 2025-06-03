@@ -22,7 +22,7 @@ data class ExchangeDto(
     @Json(name = "volume_1day_usd") val volume1DayUsd: Double?,
     @Json(name = "volume_1mth_usd") val volume1MthUsd: Double?,
     @Json(name = "metric_id") val metricId: List<String>?,
-    @Json(name = "icons") val icons: List<Any>?,
-    @Json(name = "rank") val rank: Double?,
+    @Json(name = "icons") val icons: List<ExchangeIconDto>?,
+    @Json(name = "rank") val rank: Int,
     @Json(name = "integration_status") val integrationStatus: String?
 )

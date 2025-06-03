@@ -11,7 +11,6 @@ data class ExchangeDetailModel(
     val volume1dayUsd: String,
     val volume1hrsUsd: String,
     val activePairs: Int,
-    val iconUrl: String
 )
 
 fun Exchange.toDetailModel(): ExchangeDetailModel {
@@ -23,7 +22,6 @@ fun Exchange.toDetailModel(): ExchangeDetailModel {
         volume1dayUsd = formatVolume(volume1dayUsd),
         volume1hrsUsd = formatVolume(volume1hrsUsd),
         activePairs = dataSymbolsCount,
-        iconUrl = "https://cryptoicons.org/api/icon/${exchangeId.lowercase()}/200"
     )
 
 }

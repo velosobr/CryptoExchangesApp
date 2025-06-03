@@ -24,6 +24,7 @@ import androidx.compose.ui.unit.dp
 import com.velosobr.core.state.UiState
 import com.velosobr.designsystem.components.ErrorBox
 import com.velosobr.designsystem.theme.DSColor
+import com.velosobr.designsystem.theme.DSSpacing
 import com.velosobr.exchange_detail.components.ExchangeHeader
 import com.velosobr.exchange_detail.components.ExchangeInfoRow
 import com.velosobr.exchange_detail.components.ExchangeSection
@@ -34,8 +35,9 @@ import org.koin.core.parameter.parametersOf
 @Composable
 fun ExchangeDetailScreen(
     exchangeId: String,
+    iconUrl: String,
     onBackClick: () -> Unit,
-    viewModel: ExchangeDetailViewModel = getViewModel { parametersOf(exchangeId) }
+    viewModel: ExchangeDetailViewModel = getViewModel { parametersOf(exchangeId, iconUrl) }
 ) {
     val state by viewModel.uiState.collectAsState()
 
@@ -50,13 +52,17 @@ fun ExchangeDetailScreen(
 
         is UiState.Success -> {
             val model = (state as UiState.Success).data
-            ExchangeDetailContent(model, onBackClick)
+            ExchangeDetailContent(model, iconUrl, onBackClick)
         }
     }
 }
 
 @Composable
-private fun ExchangeDetailContent(model: ExchangeDetailModel, onBackClick: () -> Unit) {
+private fun ExchangeDetailContent(
+    model: ExchangeDetailModel,
+    iconUrl: String,
+    onBackClick: () -> Unit
+) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -68,7 +74,7 @@ private fun ExchangeDetailContent(model: ExchangeDetailModel, onBackClick: () ->
             Icon(Icons.Default.ArrowBack, contentDescription = "Back", tint = DSColor.OnPrimary)
         }
 
-        ExchangeHeader(model)
+        ExchangeHeader(model, iconUrl)
 
         Spacer(modifier = Modifier.height(24.dp))
 
@@ -78,7 +84,7 @@ private fun ExchangeDetailContent(model: ExchangeDetailModel, onBackClick: () ->
             ExchangeInfoRow(label = "Data Start", value = model.dataTradeStart)
         }
 
-        Spacer(modifier = Modifier.height(24.dp))
+        Spacer(modifier = Modifier.height(DSSpacing.lg))
 
         ExchangeSection(title = "Trading Information") {
             ExchangeInfoRow(label = "Volume 1 Day", value = model.volume1dayUsd)
@@ -99,9 +105,11 @@ fun ExchangeDetailContentPreview() {
         volume1dayUsd = "$1,000,000",
         volume1hrsUsd = "$100,000",
         activePairs = 50,
-        iconUrl = "https://cryptoicons.org/api/icon/fake-exchange/200"
     )
     MaterialTheme {
-        ExchangeDetailContent(model = fakeModel, onBackClick = {})
+        ExchangeDetailContent(
+            model = fakeModel,
+            iconUrl = "https://cdn-icons-png.flaticon.com/512/36/36658.png",
+            onBackClick = {})
     }
 }
