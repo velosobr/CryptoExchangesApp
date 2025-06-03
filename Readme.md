@@ -1,7 +1,6 @@
 # 📱 CryptoExchangesApp
 
-App MVP com Clean Architecture, TDD e Jetpack Compose, consumindo dados da CoinAPI com foco em boas práticas e modularização.
-
+Aplicativo para teste técnico, desenvolvido em Android - Kotlin com Jetpack Compose que lista exchanges de criptomoedas usando dados da CoinAPI. Este projeto é um MVP técnico, desenvolvido com foco em Clean Architecture, modularização, TDD e boas práticas de engenharia de software.
 ---
 
 ## 🎯 Objetivo
@@ -44,7 +43,7 @@ exchanges-app/
 
 ## 🔐 Segurança
 
-O projeto foi estruturado considerando recomendações do OWASP Mobile Top Ten desde o início:
+O projeto foi estruturado considerando recomendações do [OWASP Mobile Top Ten](https://owasp.org/www-project-mobile-top-10/) desde o início:
 
 - ✅ Clean Architecture modularizada: evita vazamento de dados e responsabilidades
 - ✅ HTTPS via Retrofit: segurança de transporte garantida
