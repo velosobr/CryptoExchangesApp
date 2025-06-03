@@ -57,14 +57,14 @@ dependencies {
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
     implementation(libs.compose.runtime)
-    implementation(libs.compose.ui)
+    implementation(libs.androidx.ui)
     implementation(libs.compose.material3)
     implementation(libs.koin.core)
     implementation(libs.koin.android)
     implementation(libs.koin.androidx.compose)
 
     implementation(libs.coil.compose)
-    debugImplementation(libs.compose.ui.tooling)
+    debugImplementation(libs.androidx.ui.tooling)
 
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
     testImplementation(libs.junit)

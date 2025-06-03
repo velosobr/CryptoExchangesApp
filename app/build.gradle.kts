@@ -118,7 +118,5 @@ dependencies {
     debugImplementation(libs.androidx.ui.test.manifest)
     testImplementation(libs.coroutines.test)
     testImplementation(libs.mockk)
-    debugImplementation(libs.compose.ui.tooling)
-
 
 }
