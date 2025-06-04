@@ -43,7 +43,7 @@ class ExchangeListViewModelTest {
     @Test
     fun `should emit Loading then Success when use case returns data`() = runTest {
         // Arrange
-        val exchanges = ExchangeFactory.createList(3)
+        val exchanges = ExchangeFactory.createExchangeList(3)
         coEvery { getExchangesUseCase() } returns ExchangeResult.Success(exchanges)
         coEvery { getExchangeIconsUseCase(any()) } returns "https://example.com/icon.png"
         val viewModel = ExchangeListViewModel(getExchangesUseCase, getExchangeIconsUseCase)

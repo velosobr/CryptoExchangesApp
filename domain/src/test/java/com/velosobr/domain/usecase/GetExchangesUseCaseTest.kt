@@ -24,7 +24,7 @@ class GetExchangesUseCaseTest {
     @Test
     fun `should return Success when repository returns list of exchanges`() = runTest {
         // Arrange
-        val exchanges = ExchangeFactory.createList(3)
+        val exchanges = ExchangeFactory.createExchangeList(3)
 
         coEvery { repository.getExchanges() } returns ExchangeResult.Success(exchanges)
 

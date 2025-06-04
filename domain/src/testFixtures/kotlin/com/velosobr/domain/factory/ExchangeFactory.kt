@@ -30,7 +30,7 @@ object ExchangeFactory {
         )
     }
 
-    fun createList(size: Int): List<Exchange> {
+    fun createExchangeList(size: Int): List<Exchange> {
         return (1..size).map {
             create(
                 exchangeId = "exchange$it",
