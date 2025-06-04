@@ -4,7 +4,7 @@
 ![Jetpack Compose](https://img.shields.io/badge/Jetpack%20Compose-1.5.0-blue.svg)
 
 Aplicativo para teste técnico, desenvolvido em Android - Kotlin com Jetpack Compose que lista exchanges de criptomoedas usando dados da CoinAPI. Este projeto é um MVP técnico, desenvolvido com foco em Clean Architecture, modularização, TDD e boas práticas de engenharia de software.
----
+
 ## ⚡ TL;DR
 
 Se você quer uma visão rápida do projeto e suas funcionalidades, confira o GIF de demonstração abaixo:
@@ -21,7 +21,7 @@ Se você quer uma visão rápida do projeto e suas funcionalidades, confira o GI
 
 🎥 **Demonstração:**
 
-![demo](https://github.com/user-attachments/assets/1313d14e-7e88-4ef2-99f7-14e010425355)
+<img src="https://github.com/user-attachments/assets/1313d14e-7e88-4ef2-99f7-14e010425355" height="500" />
 
 ## 🎯 Objetivo
 
