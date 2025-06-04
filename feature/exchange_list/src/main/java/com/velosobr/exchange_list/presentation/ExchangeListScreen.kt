@@ -9,6 +9,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -20,6 +21,7 @@ import com.velosobr.cryptoexchangesapp.data.BuildConfig
 import com.velosobr.designsystem.components.ErrorBox
 import com.velosobr.designsystem.components.DSExchangeCardComponent
 import com.velosobr.designsystem.theme.AppTheme
+import com.velosobr.designsystem.theme.DSAppTypography
 import com.velosobr.designsystem.theme.DSColor
 import com.velosobr.designsystem.theme.DSSpacing
 import com.velosobr.domain.model.Exchange
@@ -51,7 +53,15 @@ fun ExchangeListContent(
     onExchangeClick: (String, String) -> Unit,
     onRetryClick: () -> Unit
 ) {
-    Scaffold { paddingValues ->
+    Scaffold(topBar = {
+        Text(
+            text = "Exchanges List",
+            style = DSAppTypography.titleLarge,
+            color = DSColor.DarkText,
+            modifier = Modifier
+                .padding(horizontal = DSSpacing.md, vertical = DSSpacing.lg)
+        )
+    }) { paddingValues ->
         Box(
             modifier = Modifier
                 .padding(paddingValues)

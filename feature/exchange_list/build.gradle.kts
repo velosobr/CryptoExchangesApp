@@ -68,10 +68,15 @@ dependencies {
     debugImplementation(libs.androidx.ui.tooling)
 
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
+    testImplementation(libs.androidx.ui.test.junit4)
     testImplementation(libs.turbine)
     testImplementation(libs.coroutines.test)
     testImplementation(libs.mockk)
     testImplementation(libs.junit)
     testImplementation(testFixtures(project(":domain")))
+    androidTestImplementation(testFixtures(project(":domain")))
+    androidTestImplementation(libs.androidx.junit)
+    androidTestImplementation(libs.androidx.ui.test.junit4)
+    androidTestImplementation(libs.androidx.core.ktx)
     androidTestImplementation(libs.androidx.espresso.core)
 }

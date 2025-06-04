@@ -2,7 +2,6 @@ package com.velosobr.cryptoexchangesapp.presentation.navigation
 
 
 import android.net.Uri
-import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
@@ -10,22 +9,21 @@ import androidx.compose.animation.slideInHorizontally
 import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavType
+import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import com.google.accompanist.navigation.animation.AnimatedNavHost
-import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 import com.velosobr.cryptoexchangesapp.data.BuildConfig
 import com.velosobr.designsystem.theme.AppTheme
 import com.velosobr.exchange_detail.presentation.ExchangeDetailScreen
 import com.velosobr.exchange_list.presentation.ExchangeListScreen
 
-@OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun ExchangesApp() {
-    val navController = rememberAnimatedNavController() // precisa importar do accompanist
+    val navController = rememberNavController()
 
     AppTheme {
-        AnimatedNavHost(
+        NavHost(
             navController = navController,
             startDestination = "exchangeList"
         ) {
