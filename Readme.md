@@ -1,10 +1,27 @@
 # 📱 CryptoExchangesApp
 ![CI](https://github.com/velosobr/CryptoExchangesApp/actions/workflows/android-ci.yml/badge.svg)
-![Kotlin](https://img.shields.io/badge/Kotlin-1.7.20-blue.svg)
-![Jetpack Compose](https://img.shields.io/badge/Jetpack%20Compose-1.4.0-blue.svg)
+![Kotlin](https://img.shields.io/badge/Kotlin-2.0.0-blue.svg)
+![Jetpack Compose](https://img.shields.io/badge/Jetpack%20Compose-1.5.0-blue.svg)
 
 Aplicativo para teste técnico, desenvolvido em Android - Kotlin com Jetpack Compose que lista exchanges de criptomoedas usando dados da CoinAPI. Este projeto é um MVP técnico, desenvolvido com foco em Clean Architecture, modularização, TDD e boas práticas de engenharia de software.
 ---
+## ⚡ TL;DR
+
+Se você quer uma visão rápida do projeto e suas funcionalidades, confira o GIF de demonstração abaixo:
+
+---
+
+### Funcionalidades principais:
+- Listagem de exchanges de criptomoedas.
+- Detalhes de cada exchange com informações relevantes.
+- Design moderno utilizando Jetpack Compose.
+- Arquitetura limpa e modularizada.
+
+---
+
+🎥 **Demonstração:**
+
+![demo](https://github.com/user-attachments/assets/1313d14e-7e88-4ef2-99f7-14e010425355)
 
 ## 🎯 Objetivo
 
@@ -95,6 +112,16 @@ O projeto foi estruturado considerando recomendações do [OWASP Mobile Top Ten]
 - Relatório de cobertura com Kover
 
 ---
+
+## 🔑 Configuração da API
+
+Para que o aplicativo funcione corretamente, é necessário configurar uma chave de API no arquivo `local.properties`. Siga os passos abaixo:
+
+1. Abra o arquivo `local.properties` na raiz do projeto.
+2. Adicione a seguinte linha ao arquivo:
+
+   ```ini
+   COIN_API_KEY=sua_chave_colada_aqui
 
 ## 👨‍💻 Autor
 
