@@ -25,54 +25,75 @@ class ExchangeRepositoryImplTest {
     @Test
     fun `should return Success when API returns valid data`() = runTest {
         // Arrange
-        val dtoList = listOf(
+        val exchangeList = listOf(
             ExchangeDto(
-                exchangeId = "OKCOINCNY",
-                website = "https://www.okcoin.cn/",
-                name = "OKCoin CNY",
-                dataQuoteStart = "2015-02-15T12:53:50.3430000Z",
-                dataQuoteEnd = "2018-03-09T23:34:52.5800000Z",
-                dataOrderbookStart = "2015-02-15T12:53:50.3430000Z",
-                dataOrderbookEnd = "2018-03-09T23:34:52.5800000Z",
-                dataTradeStart = "2013-06-12T14:24:24.0000000Z",
-                dataTradeEnd = "2017-11-01T16:30:39.7077259Z",
-                dataSymbolsCount = 2,
-                volume1HrsUsd = 0.0,
-                volume1DayUsd = 0.0,
-                volume1MthUsd = 0.0,
-                rank = 1,
-                dataStart = TODO(),
-                dataEnd = TODO(),
-                dataTradeCount = TODO(),
-                metricId = TODO(),
-                icons = TODO(),
-                integrationStatus = TODO()
-            ),
-            ExchangeDto(
-                exchangeId = "binance",
+                exchangeId = "BINANCE",
                 website = "https://www.binance.com",
                 name = "Binance",
-                dataQuoteStart = "2017-07-14T00:00:00Z",
-                dataQuoteEnd = "2023-10-01T00:00:00Z",
-                dataOrderbookStart = "2017-07-14T00:00:00Z",
-                dataOrderbookEnd = "2023-10-01T00:00:00Z",
-                dataTradeStart = "2017-07-14T00:00:00Z",
-                dataTradeEnd = "2023-10-01T00:00:00Z",
-                dataSymbolsCount = 1000,
-                volume1HrsUsd = 5000000.0,
-                volume1DayUsd = 100000000.0,
-                volume1MthUsd = 3000000000.0,
+                dataStart = "2020-01-01",
+                dataEnd = "2023-01-01",
+                dataQuoteStart = "2020-01-01T00:00:00Z",
+                dataQuoteEnd = "2023-01-01T00:00:00Z",
+                dataOrderbookStart = "2020-01-01T00:00:00Z",
+                dataOrderbookEnd = "2023-01-01T00:00:00Z",
+                dataTradeStart = "2020-01-01T00:00:00Z",
+                dataTradeEnd = "2023-01-01T00:00:00Z",
+                dataTradeCount = 1000000,
+                dataSymbolsCount = 500,
+                volume1HrsUsd = 100000.0,
+                volume1DayUsd = 2400000.0,
+                volume1MthUsd = 72000000.0,
+                metricId = listOf("metric1", "metric2"),
+                icons = listOf(),
                 rank = 1,
-                dataStart = TODO(),
-                dataEnd = TODO(),
-                dataTradeCount = TODO(),
-                metricId = TODO(),
-                icons = TODO(),
-                integrationStatus = TODO()
+                integrationStatus = "active"
             ),
-
+            ExchangeDto(
+                exchangeId = "COINBASE",
+                website = "https://www.coinbase.com",
+                name = "Coinbase",
+                dataStart = "2019-01-01",
+                dataEnd = "2023-01-01",
+                dataQuoteStart = "2019-01-01T00:00:00Z",
+                dataQuoteEnd = "2023-01-01T00:00:00Z",
+                dataOrderbookStart = "2019-01-01T00:00:00Z",
+                dataOrderbookEnd = "2023-01-01T00:00:00Z",
+                dataTradeStart = "2019-01-01T00:00:00Z",
+                dataTradeEnd = "2023-01-01T00:00:00Z",
+                dataTradeCount = 500000,
+                dataSymbolsCount = 300,
+                volume1HrsUsd = 50000.0,
+                volume1DayUsd = 1200000.0,
+                volume1MthUsd = 36000000.0,
+                metricId = listOf("metric3", "metric4"),
+                icons = listOf(),
+                rank = 2,
+                integrationStatus = "active"
+            ),
+            ExchangeDto(
+                exchangeId = "KRAKEN",
+                website = "https://www.kraken.com",
+                name = "Kraken",
+                dataStart = "2018-01-01",
+                dataEnd = "2023-01-01",
+                dataQuoteStart = "2018-01-01T00:00:00Z",
+                dataQuoteEnd = "2023-01-01T00:00:00Z",
+                dataOrderbookStart = "2018-01-01T00:00:00Z",
+                dataOrderbookEnd = "2023-01-01T00:00:00Z",
+                dataTradeStart = "2018-01-01T00:00:00Z",
+                dataTradeEnd = "2023-01-01T00:00:00Z",
+                dataTradeCount = 750000,
+                dataSymbolsCount = 400,
+                volume1HrsUsd = 75000.0,
+                volume1DayUsd = 1800000.0,
+                volume1MthUsd = 54000000.0,
+                metricId = listOf("metric5", "metric6"),
+                icons = listOf(),
+                rank = 3,
+                integrationStatus = "active"
             )
-        coEvery { api.getExchanges(apiKey) } returns dtoList
+        )
+        coEvery { api.getExchanges(apiKey) } returns exchangeList
 
         // Act
         val result = repository.getExchanges()
@@ -80,8 +101,8 @@ class ExchangeRepositoryImplTest {
         // Assert
         assertTrue(result is ExchangeResult.Success)
         val data = (result as ExchangeResult.Success).data
-        assertEquals("OKCOINCNY", data.first().exchangeId)
-        assertEquals("OKCoin CNY", data.first().name)
+        assertEquals("BINANCE", data.first().exchangeId)
+        assertEquals("Binance", data.first().name)
     }
 
     @Test

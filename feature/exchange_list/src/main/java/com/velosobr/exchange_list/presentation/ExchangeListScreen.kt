@@ -14,13 +14,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.velosobr.core.state.UiState
 import com.velosobr.cryptoexchangesapp.data.BuildConfig
-import com.velosobr.designsystem.components.ErrorBox
 import com.velosobr.designsystem.components.DSExchangeCardComponent
-import com.velosobr.designsystem.theme.AppTheme
+import com.velosobr.designsystem.components.ErrorBox
 import com.velosobr.designsystem.theme.DSAppTypography
 import com.velosobr.designsystem.theme.DSColor
 import com.velosobr.designsystem.theme.DSSpacing
@@ -111,80 +109,5 @@ fun ExchangeListContent(
                 }
             }
         }
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun ExchangeListContentPreview() {
-    val fakeData = listOf(
-
-        Exchange(
-            exchangeId = "binance",
-            website = "https://www.binance.com",
-            name = "Binance",
-            dataQuoteStart = java.time.ZonedDateTime.now(),
-            dataQuoteEnd = java.time.ZonedDateTime.now(),
-            dataOrderbookStart = java.time.ZonedDateTime.now(),
-            dataOrderbookEnd = java.time.ZonedDateTime.now(),
-            dataTradeStart = java.time.ZonedDateTime.now(),
-            dataTradeEnd = java.time.ZonedDateTime.now(),
-            dataSymbolsCount = 100,
-            volume1hrsUsd = 100000.0,
-            volume1dayUsd = 5000000.0,
-            volume1mthUsd = 150000000.0,
-            rank = 1,
-            iconUrl = "https://s3.eu-central-1.amazonaws.com/bbxt-static-icons/type-id/png_32/74eaad903814407ebdfc3828fe5318ba.png"
-        ),
-
-        Exchange(
-            exchangeId = "coinbase",
-            website = "https://www.coinbase.com",
-            name = "Coinbase",
-            dataQuoteStart = java.time.ZonedDateTime.now(),
-            dataQuoteEnd = java.time.ZonedDateTime.now(),
-            dataOrderbookStart = java.time.ZonedDateTime.now(),
-            dataOrderbookEnd = java.time.ZonedDateTime.now(),
-            dataTradeStart = java.time.ZonedDateTime.now(),
-            dataTradeEnd = java.time.ZonedDateTime.now(),
-            dataSymbolsCount = 80,
-            volume1hrsUsd = 50000.0,
-            volume1dayUsd = 2000000.0,
-            volume1mthUsd = 60000000.0,
-            rank = 2,
-            iconUrl = "https://s3.eu-central-1.amazonaws.com/bbxt-static-icons/type-id/png_32/54c07e9bf5c140a8ae8d866704a4e393.png"
-        ),
-
-        Exchange(
-            exchangeId = "kraken",
-            website = "https://www.kraken.com",
-            name = "Kraken",
-            dataQuoteStart = java.time.ZonedDateTime.now(),
-            dataQuoteEnd = java.time.ZonedDateTime.now(),
-            dataOrderbookStart = java.time.ZonedDateTime.now(),
-            dataOrderbookEnd = java.time.ZonedDateTime.now(),
-            dataTradeStart = java.time.ZonedDateTime.now(),
-            dataTradeEnd = java.time.ZonedDateTime.now(),
-            dataSymbolsCount = 60,
-            volume1hrsUsd = 30000.0,
-            volume1dayUsd = 1000000.0,
-            volume1mthUsd = 30000000.0,
-            rank = 3,
-            iconUrl = "https://example.com/kraken.png"
-        )
-    )
-    AppTheme {
-        ExchangeListContent(
-            uiState = UiState.Success(fakeData),
-            iconMap = mapOf(
-                "binance" to "https://s3.eu-central-1.amazonaws.com/bbxt-static-icons/type-id/png_32/74eaad903814407ebdfc3828fe5318ba.png",
-                "coinbase" to "https://s3.eu-central-1.amazonaws.com/bbxt-static-icons/type-id/png_32/54c07e9bf5c140a8ae8d866704a4e393.png",
-                "kraken" to "https://example.com/kraken.png"
-            ),
-            onExchangeClick = { _, _ ->
-                // Handle exchange click
-            },
-            onRetryClick = {}
-        )
     }
 }

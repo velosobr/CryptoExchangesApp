@@ -11,7 +11,8 @@ val localProperties = Properties().apply {
     load(FileInputStream(rootProject.file("local.properties")))
 }
 
-val coinApiKey = localProperties["COIN_API_KEY"] as String
+val coinApiKey = localProperties.getProperty("COIN_API_KEY") ?: ""
+
 android {
     namespace = "com.velosobr.cryptoexchangesapp"
     compileSdk = 35

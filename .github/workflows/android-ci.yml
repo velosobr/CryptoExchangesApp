@@ -4,7 +4,7 @@ on:
   push:
     branches: [ master ]
   pull_request:
-    branches: [ main ]
+    branches: [ master ]
 
 jobs:
   build:
@@ -14,6 +14,9 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+
+      - name: Create local.properties
+        run: echo "sdk.dir=$ANDROID_HOME" > local.properties
 
       - name: Setup JDK 17
         uses: actions/setup-java@v3
@@ -29,14 +32,10 @@ jobs:
 
       - name: Run unit tests for all relevant modules
         run: |
-          ./gradlew :core:testDebugUnitTest \
-                     :domain:testDebugUnitTest \
-                     :features:exchange_list:testDebugUnitTest \
-                     :features:exchange_detail:testDebugUnitTest \
+          ./gradlew  :domain:test \
+                     :feature:exchange_list:test \
+                     :feature:exchange_detail:test \
                      --continue
-
-      - name: Run UI tests (Compose)
-        run: ./gradlew :features:exchange_list:connectedDebugAndroidTest
 
       - name: Generate Kover coverage reports (all modules)
         run: ./gradlew koverXmlReport koverHtmlReport

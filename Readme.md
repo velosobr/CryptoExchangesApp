@@ -1,4 +1,7 @@
 # 📱 CryptoExchangesApp
+![CI](https://github.com/velosobr/seu-repo-nome/actions/workflows/android-ci.yml/badge.svg)
+![Kotlin](https://img.shields.io/badge/Kotlin-1.7.20-blue.svg)
+![Jetpack Compose](https://img.shields.io/badge/Jetpack%20Compose-1.4.0-blue.svg)
 
 Aplicativo para teste técnico, desenvolvido em Android - Kotlin com Jetpack Compose que lista exchanges de criptomoedas usando dados da CoinAPI. Este projeto é um MVP técnico, desenvolvido com foco em Clean Architecture, modularização, TDD e boas práticas de engenharia de software.
 ---
@@ -57,7 +60,8 @@ O projeto foi estruturado considerando recomendações do [OWASP Mobile Top Ten]
 ## 🧪 Testes Automatizados
 
 - Padrão AAA (Arrange, Act, Assert)
-- Testes de UseCases e ViewModels
+- Testes unitários de UseCases e ViewModels
+- Testes de UI com Jetpack Compose Test
 - Simulação com MockK
 - Validação de `Flow` com Turbine
 - Cobertura de código com Kover
@@ -68,6 +72,9 @@ O projeto foi estruturado considerando recomendações do [OWASP Mobile Top Ten]
 
 - [ ] Criar módulo centralizador de dependências
 - [ ] Obfuscação com R8/Proguard
+- [ ] Adicionar check e lint ao CI.
+- [ ] Integrar com Codecov para exibir cobertura no PR.
+- [ ] Gerar cache para acelerar builds com gradle-build-action.
 
 ---
 

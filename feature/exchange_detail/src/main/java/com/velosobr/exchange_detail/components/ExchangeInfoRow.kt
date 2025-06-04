@@ -7,7 +7,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import com.velosobr.designsystem.theme.DSAppTypography
 import com.velosobr.designsystem.theme.DSColor
 import com.velosobr.designsystem.theme.DSSpacing
@@ -30,10 +29,4 @@ fun ExchangeInfoRow(label: String, value: String) {
             style = MaterialTheme.typography.bodyMedium
         )
     }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun PreviewExchangeInfoRow() {
-    ExchangeInfoRow(label = "Volume 1 Day", value = "$1,234,567")
 }
