@@ -1,5 +1,5 @@
 # 📱 CryptoExchangesApp
-![CI](https://github.com/velosobr/seu-repo-nome/actions/workflows/android-ci.yml/badge.svg)
+![CI](https://github.com/velosobr/CryptoExchangesApp/actions/workflows/android-ci.yml/badge.svg)
 ![Kotlin](https://img.shields.io/badge/Kotlin-1.7.20-blue.svg)
 ![Jetpack Compose](https://img.shields.io/badge/Jetpack%20Compose-1.4.0-blue.svg)
 
