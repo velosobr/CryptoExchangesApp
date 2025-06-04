@@ -1,0 +1,48 @@
+name: Android CI
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup JDK 17
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: 17
+
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v3
+
+      - name: Grant execute permission to gradlew
+        run: chmod +x ./gradlew
+
+      - name: Run unit tests for all relevant modules
+        run: |
+          ./gradlew :core:testDebugUnitTest \
+                     :domain:testDebugUnitTest \
+                     :features:exchange_list:testDebugUnitTest \
+                     :features:exchange_detail:testDebugUnitTest \
+                     --continue
+
+      - name: Run UI tests (Compose)
+        run: ./gradlew :features:exchange_list:connectedDebugAndroidTest
+
+      - name: Generate Kover coverage reports (all modules)
+        run: ./gradlew koverXmlReport koverHtmlReport
+
+      - name: Upload HTML coverage report
+        uses: actions/upload-artifact@v4
+        with:
+          name: kover-report
+          path: '**/build/reports/kover/html'

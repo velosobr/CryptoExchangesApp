@@ -2,6 +2,7 @@ plugins {
     id("java-library")
     alias(libs.plugins.jetbrains.kotlin.jvm)
     id("java-test-fixtures")
+    id("org.jetbrains.kotlinx.kover")
 }
 java {
     sourceCompatibility = JavaVersion.VERSION_11

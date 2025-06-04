@@ -6,4 +6,5 @@ plugins {
     alias(libs.plugins.jetbrains.kotlin.jvm) apply false
     alias(libs.plugins.android.library) apply false
     id("org.jetbrains.kotlin.plugin.serialization") version libs.versions.kotlin.get()
+    id("org.jetbrains.kotlinx.kover") version "0.8.3"
 }
