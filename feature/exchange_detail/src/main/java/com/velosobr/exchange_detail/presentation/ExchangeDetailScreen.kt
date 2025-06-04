@@ -14,14 +14,12 @@ import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.velosobr.core.state.UiState
 import com.velosobr.designsystem.components.ErrorBox
@@ -108,25 +106,5 @@ private fun ExchangeDetailContent(
             ExchangeInfoRow(label = "Volume 1 Hour", value = model.volume1hrsUsd)
             ExchangeInfoRow(label = "Active Pairs", value = model.activePairs.toString())
         }
-    }
-}
-
-@Preview
-@Composable
-fun ExchangeDetailContentPreview() {
-    val fakeModel = ExchangeDetailModel(
-        name = "Fake Exchange",
-        exchangeId = "fake-exchange",
-        website = "https://fakeexchange.com",
-        dataTradeStart = "2023-01-01",
-        volume1dayUsd = "$1,000,000",
-        volume1hrsUsd = "$100,000",
-        activePairs = 50,
-    )
-    MaterialTheme {
-        ExchangeDetailContent(
-            model = fakeModel,
-            iconUrl = "https://cdn-icons-png.flaticon.com/512/36/36658.png",
-            onBackClick = {})
     }
 }
