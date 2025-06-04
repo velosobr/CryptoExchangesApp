@@ -85,16 +85,6 @@ O projeto foi estruturado considerando recomendações do [OWASP Mobile Top Ten]
 
 ---
 
-## 🚧 Planejamento futuro (Melhorias)
-
-- [ ] Criar módulo centralizador de dependências
-- [ ] Obfuscação com R8/Proguard
-- [ ] Adicionar check e lint ao CI.
-- [ ] Integrar com Codecov para exibir cobertura no PR.
-- [ ] Gerar cache para acelerar builds com gradle-build-action.
-
----
-
 ## 🌐 Camada de Rede
 
 - Retrofit com Moshi (JSON)
@@ -123,6 +113,17 @@ Para que o aplicativo funcione corretamente, é necessário configurar uma chave
    ```ini
    COIN_API_KEY=sua_chave_colada_aqui
 
+---
+
+## 🚧 Planejamento futuro (Melhorias)
+
+- [ ] Criar módulo centralizador de dependências
+- [ ] Obfuscação com R8/Proguard
+- [ ] Adicionar check e lint ao CI.
+- [ ] Integrar com Codecov para exibir cobertura no PR.
+- [ ] Gerar cache para acelerar builds com gradle-build-action.
+
+---
 ## 👨‍💻 Autor
 
 [Lino Veloso](https://github.com/velosobr) – Android Developer
