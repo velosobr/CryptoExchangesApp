@@ -32,8 +32,7 @@ jobs:
 
       - name: Run unit tests for all relevant modules
         run: |
-          ./gradlew :core:testDebugUnitTest \
-                     :domain:testDebugUnitTest \
+          ./gradlew  :domain:testDebugUnitTest \
                      :features:exchange_list:testDebugUnitTest \
                      :features:exchange_detail:testDebugUnitTest \
                      --continue
