@@ -38,7 +38,7 @@ jobs:
                      --continue
 
       - name: Run UI tests (Compose)
-        run: ./gradlew :features:exchange_list:connectedDebugAndroidTest
+        run: ./gradlew :feature:exchange_list:connectedDebugAndroidTest
 
       - name: Generate Kover coverage reports (all modules)
         run: ./gradlew koverXmlReport koverHtmlReport
