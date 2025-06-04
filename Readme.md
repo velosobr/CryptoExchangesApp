@@ -21,7 +21,7 @@ Se você quer uma visão rápida do projeto e suas funcionalidades, confira o GI
 
 🎥 **Demonstração:**
 
-<img src="https://github.com/user-attachments/assets/1313d14e-7e88-4ef2-99f7-14e010425355" height="500" />
+<img src="https://github.com/user-attachments/assets/3cafb8b1-216b-47fa-b73b-65bacfb98276" height="500" />
 
 ## 🎯 Objetivo
 
