@@ -101,8 +101,8 @@ class ExchangeRepositoryImplTest {
         // Assert
         assertTrue(result is ExchangeResult.Success)
         val data = (result as ExchangeResult.Success).data
-        assertEquals("OKCOINCNY", data.first().exchangeId)
-        assertEquals("OKCoin CNY", data.first().name)
+        assertEquals("BINANCE", data.first().exchangeId)
+        assertEquals("Binance", data.first().name)
     }
 
     @Test
