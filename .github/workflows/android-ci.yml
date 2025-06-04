@@ -32,9 +32,9 @@ jobs:
 
       - name: Run unit tests for all relevant modules
         run: |
-          ./gradlew  :domain:testDebugUnitTest \
-                     :features:exchange_list:testDebugUnitTest \
-                     :features:exchange_detail:testDebugUnitTest \
+          ./gradlew  :domain:test \
+                     :features:exchange_list:test \
+                     :features:exchange_detail:test \
                      --continue
 
       - name: Run UI tests (Compose)
