@@ -15,7 +15,7 @@ class LoggingInterceptor : Interceptor {
         val durationMs = (endTime - startTime) / 1e6
 
         Timber.tag("Network")
-            .d("→ ${request.method()} ${request.url()} | ← ${response.code()} (${durationMs}ms)")
+            .d("→ ${request.method} ${request.url} | ← ${response.code} (${durationMs}ms)")
 
         return response
     }

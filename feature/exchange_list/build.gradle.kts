@@ -65,7 +65,7 @@ dependencies {
     implementation(libs.koin.core)
     implementation(libs.koin.android)
     implementation(libs.koin.androidx.compose)
-
+    implementation(libs.accompanist.swiperefresh)
     debugImplementation(libs.androidx.ui.tooling)
 
     implementation(libs.androidx.lifecycle.viewmodel.ktx)

@@ -26,10 +26,4 @@ class ExchangeIconDataStore(private val context: Context) {
             .map { prefs -> prefs[iconKey(exchangeId)] }
             .first()
 
-
-    suspend fun clearIcon(exchangeId: String) {
-        context.dataStore.edit { prefs ->
-            prefs.remove(iconKey(exchangeId))
-        }
-    }
 }
