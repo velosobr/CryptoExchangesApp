@@ -3,11 +3,12 @@ package com.velosobr.exchange_list.presentation
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.velosobr.core.result.ExchangeResult
-import com.velosobr.core.state.UiState
-import com.velosobr.domain.model.Exchange
-import com.velosobr.domain.usecase.GetExchangeIconUrlUseCase
+import com.velosobr.domain.usecase.GetExchangeIconUrlByIdUseCase
+import com.velosobr.domain.usecase.PrefetchExchangeIconsUseCase
 import com.velosobr.domain.usecase.GetExchangesUseCase
-import kotlinx.coroutines.delay
+import kotlinx.coroutines.async
+import kotlinx.coroutines.awaitAll
+import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -16,51 +17,51 @@ import kotlinx.coroutines.launch
 
 class ExchangeListViewModel(
     private val getExchangesUseCase: GetExchangesUseCase,
-    private val getExchangeIconsUseCase: GetExchangeIconUrlUseCase
+    private val getExchangeIconsUseCase: GetExchangeIconUrlByIdUseCase,
+    private val prefetchExchangeIconsUseCase: PrefetchExchangeIconsUseCase
 ) : ViewModel() {
 
-    private val _uiState = MutableStateFlow<UiState<List<Exchange>>>(UiState.Loading)
-    val uiState: StateFlow<UiState<List<Exchange>>> = _uiState.asStateFlow()
-    private val _exchangeIcons = MutableStateFlow<Map<String, String?>>(emptyMap())
-    val exchangeIcons: StateFlow<Map<String, String?>> = _exchangeIcons
-    private val _isRefreshing = MutableStateFlow(false)
-    val isRefreshing: StateFlow<Boolean> = _isRefreshing
+    private val _state = MutableStateFlow(ExchangeListState())
+    val state: StateFlow<ExchangeListState> = _state.asStateFlow()
 
     init {
         fetchExchanges()
     }
 
     fun fetchExchanges() {
+        _state.update { it.copy(isLoading = true, error = null) }
         viewModelScope.launch {
-            _uiState.value = UiState.Loading
-
-            val exchanges = getExchangesUseCase()
-
-            _uiState.value = when (exchanges) {
+            when (val result = getExchangesUseCase()) {
                 is ExchangeResult.Success -> {
-
-                    exchanges.data.forEach { exchange ->
-                        launch {
-                            val icon = getExchangeIconsUseCase(exchange.exchangeId)
-                            _exchangeIcons.update { it + (exchange.exchangeId to icon) }
-                        }
+                    val exchanges = result.data
+                    prefetchExchangeIconsUseCase()
+                    val iconsMap = coroutineScope {
+                        exchanges.map { exchange ->
+                            async {
+                                exchange.exchangeId to getExchangeIconsUseCase(exchange.exchangeId)
+                            }
+                        }.awaitAll().toMap()
                     }
-                    UiState.Success(exchanges.data)
+
+                    _state.update {
+                        it.copy(
+                            isLoading = false,
+                            exchanges = exchanges,
+                            exchangeIcons = iconsMap,
+                            error = null
+                        )
+                    }
                 }
 
                 is ExchangeResult.Error -> {
-                    UiState.Error(message = exchanges.exception.message ?: "Erro desconhecido")
+                    _state.update {
+                        it.copy(
+                            isLoading = false,
+                            error = result.exception.message ?: "Erro desconhecido"
+                        )
+                    }
                 }
             }
-        }
-    }
-
-    fun refreshExchanges() {
-        viewModelScope.launch {
-            _isRefreshing.value = true
-            fetchExchanges()
-            delay(500)
-            _isRefreshing.value = false
         }
     }
 }

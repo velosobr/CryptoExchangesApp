@@ -6,7 +6,7 @@ import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 val exchangeListModule = module {
-    viewModel { ExchangeListViewModel(get(), get()) }
+    viewModel { ExchangeListViewModel(get(), get(), get()) }
 
     factory {
         GetExchangesUseCase(

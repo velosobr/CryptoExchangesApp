@@ -18,14 +18,12 @@ import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.google.accompanist.swiperefresh.SwipeRefresh
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
-import com.velosobr.core.state.UiState
 import com.velosobr.cryptoexchangesapp.data.BuildConfig
 import com.velosobr.designsystem.components.DSExchangeCardComponent
 import com.velosobr.designsystem.components.ErrorBox
 import com.velosobr.designsystem.theme.DSAppTypography
 import com.velosobr.designsystem.theme.DSColor
 import com.velosobr.designsystem.theme.DSSpacing
-import com.velosobr.domain.model.Exchange
 import com.velosobr.exchange_list.model.toCardModel
 import org.koin.androidx.compose.koinViewModel
 
@@ -34,36 +32,25 @@ fun ExchangeListScreen(
     onExchangeClick: (String, String) -> Unit
 ) {
     val viewModel: ExchangeListViewModel = koinViewModel()
-
-    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
-    val iconMap by viewModel.exchangeIcons.collectAsStateWithLifecycle()
-    val isRefreshing by viewModel.isRefreshing.collectAsStateWithLifecycle()
+    val state by viewModel.state.collectAsStateWithLifecycle()
 
     ExchangeListContent(
-        uiState = uiState,
-        iconMap = iconMap,
+        state = state,
         onExchangeClick = onExchangeClick,
-        onRetryClick = {
-            viewModel.fetchExchanges()
-        },
-        isRefreshing = isRefreshing,
-        onRefresh = {
-            viewModel.refreshExchanges()
-        }
+        onRetryClick = { viewModel.fetchExchanges() },
+        onRefresh = { viewModel.fetchExchanges() }
     )
 }
 
 @Composable
 fun ExchangeListContent(
-    uiState: UiState<List<Exchange>>,
-    iconMap: Map<String, String?>,
+    state: ExchangeListState,
     onExchangeClick: (String, String) -> Unit,
-    isRefreshing: Boolean,
     onRefresh: () -> Unit,
     onRetryClick: () -> Unit
 ) {
 
-    val swipeRefreshState = rememberSwipeRefreshState(isRefreshing)
+    val swipeRefreshState = rememberSwipeRefreshState(state.isRefreshing)
 
     Scaffold(
         topBar = {
@@ -88,22 +75,28 @@ fun ExchangeListContent(
                     .background(DSColor.DarkBackground)
                     .fillMaxSize()
             ) {
-                when (uiState) {
-                    is UiState.Loading -> {
+                when {
+                    state.isLoading -> {
                         CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
                     }
 
-                    is UiState.Success -> {
-                        val exchanges = uiState.data
+                    state.error != null -> {
+                        ErrorBox(
+                            title = "Oops! Something went wrong.",
+                            message = state.error,
+                            onRetry = onRetryClick
+                        )
+                    }
+
+                    else -> {
                         LazyColumn(
                             modifier = Modifier.fillMaxSize(),
                             contentPadding = PaddingValues(bottom = DSSpacing.xxxl)
                         ) {
-                            items(items = exchanges, key = { it.exchangeId }) { exchange ->
-                                val iconUrl =
-                                    iconMap[exchange.exchangeId] ?: BuildConfig.DEFAULT_ICON_URL
+                            items(state.exchanges, key = { it.exchangeId }) { exchange ->
+                                val iconUrl = state.exchangeIcons[exchange.exchangeId]
+                                    ?: BuildConfig.DEFAULT_ICON_URL
                                 val model = exchange.toCardModel()
-
 
                                 DSExchangeCardComponent(
                                     name = model.name,
@@ -118,17 +111,8 @@ fun ExchangeListContent(
                                             fadeOutSpec = tween(300),
                                         )
                                 )
-
                             }
                         }
-                    }
-
-                    is UiState.Error -> {
-                        ErrorBox(
-                            title = "Oops! Something went wrong.",
-                            message = uiState.message,
-                            onRetry = onRetryClick
-                        )
                     }
                 }
             }

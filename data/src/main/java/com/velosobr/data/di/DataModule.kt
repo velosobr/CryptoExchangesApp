@@ -5,7 +5,8 @@ import com.facebook.flipper.plugins.network.NetworkFlipperPlugin
 import com.velosobr.cryptoexchangesapp.data.BuildConfig
 import com.velosobr.data.remote.api.ExchangeApiService
 import com.velosobr.data.remote.interceptor.LoggingInterceptor
-import com.velosobr.domain.usecase.GetExchangeIconUrlUseCase
+import com.velosobr.domain.usecase.GetExchangeIconUrlByIdUseCase
+import com.velosobr.domain.usecase.PrefetchExchangeIconsUseCase
 import okhttp3.OkHttpClient
 import org.koin.dsl.module
 import retrofit2.Retrofit
@@ -36,5 +37,6 @@ val dataModule = module {
             .create(ExchangeApiService::class.java)
     }
 
-    single { GetExchangeIconUrlUseCase(get()) }
+    single { GetExchangeIconUrlByIdUseCase(get()) }
+    single { PrefetchExchangeIconsUseCase(get()) }
 }
