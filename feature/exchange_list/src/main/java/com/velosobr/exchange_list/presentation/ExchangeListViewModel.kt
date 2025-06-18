@@ -7,6 +7,7 @@ import com.velosobr.core.state.UiState
 import com.velosobr.domain.model.Exchange
 import com.velosobr.domain.usecase.GetExchangeIconUrlUseCase
 import com.velosobr.domain.usecase.GetExchangesUseCase
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -22,6 +23,8 @@ class ExchangeListViewModel(
     val uiState: StateFlow<UiState<List<Exchange>>> = _uiState.asStateFlow()
     private val _exchangeIcons = MutableStateFlow<Map<String, String?>>(emptyMap())
     val exchangeIcons: StateFlow<Map<String, String?>> = _exchangeIcons
+    private val _isRefreshing = MutableStateFlow(false)
+    val isRefreshing: StateFlow<Boolean> = _isRefreshing
 
     init {
         fetchExchanges()
@@ -49,6 +52,15 @@ class ExchangeListViewModel(
                     UiState.Error(message = exchanges.exception.message ?: "Erro desconhecido")
                 }
             }
+        }
+    }
+
+    fun refreshExchanges() {
+        viewModelScope.launch {
+            _isRefreshing.value = true
+            fetchExchanges()
+            delay(500)
+            _isRefreshing.value = false
         }
     }
 }

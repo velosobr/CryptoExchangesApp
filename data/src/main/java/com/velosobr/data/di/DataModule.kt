@@ -31,7 +31,7 @@ val dataModule = module {
         Retrofit.Builder()
             .baseUrl("https://rest.coinapi.io/")
             .addConverterFactory(MoshiConverterFactory.create())
-            .client(OkHttpClient.Builder().build())
+            .client(get())
             .build()
             .create(ExchangeApiService::class.java)
     }

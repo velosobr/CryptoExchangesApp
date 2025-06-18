@@ -1,5 +1,6 @@
 package com.velosobr.exchange_list.presentation
 
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
@@ -15,6 +16,8 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.google.accompanist.swiperefresh.SwipeRefresh
+import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 import com.velosobr.core.state.UiState
 import com.velosobr.cryptoexchangesapp.data.BuildConfig
 import com.velosobr.designsystem.components.DSExchangeCardComponent
@@ -34,6 +37,7 @@ fun ExchangeListScreen(
 
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     val iconMap by viewModel.exchangeIcons.collectAsStateWithLifecycle()
+    val isRefreshing by viewModel.isRefreshing.collectAsStateWithLifecycle()
 
     ExchangeListContent(
         uiState = uiState,
@@ -41,7 +45,12 @@ fun ExchangeListScreen(
         onExchangeClick = onExchangeClick,
         onRetryClick = {
             viewModel.fetchExchanges()
-        })
+        },
+        isRefreshing = isRefreshing,
+        onRefresh = {
+            viewModel.refreshExchanges()
+        }
+    )
 }
 
 @Composable
@@ -49,63 +58,78 @@ fun ExchangeListContent(
     uiState: UiState<List<Exchange>>,
     iconMap: Map<String, String?>,
     onExchangeClick: (String, String) -> Unit,
+    isRefreshing: Boolean,
+    onRefresh: () -> Unit,
     onRetryClick: () -> Unit
 ) {
-    Scaffold(topBar = {
-        Text(
-            text = "Exchanges List",
-            style = DSAppTypography.titleLarge,
-            color = DSColor.DarkText,
-            modifier = Modifier
-                .padding(horizontal = DSSpacing.md, vertical = DSSpacing.lg)
-        )
-    }) { paddingValues ->
-        Box(
-            modifier = Modifier
-                .padding(paddingValues)
-                .background(DSColor.DarkBackground)
-                .fillMaxSize()
+
+    val swipeRefreshState = rememberSwipeRefreshState(isRefreshing)
+
+    Scaffold(
+        topBar = {
+            Text(
+                text = "Exchanges List",
+                style = DSAppTypography.titleLarge,
+                color = DSColor.DarkText,
+                modifier = Modifier
+                    .padding(horizontal = DSSpacing.md, vertical = DSSpacing.lg)
+            )
+        }
+    ) { paddingValues ->
+        SwipeRefresh(
+            state = swipeRefreshState,
+            onRefresh = onRefresh,
+            indicatorPadding = paddingValues,
+            modifier = Modifier.fillMaxSize()
         ) {
-            when (uiState) {
-                is UiState.Loading -> {
-                    CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
-                }
+            Box(
+                modifier = Modifier
+                    .padding(paddingValues)
+                    .background(DSColor.DarkBackground)
+                    .fillMaxSize()
+            ) {
+                when (uiState) {
+                    is UiState.Loading -> {
+                        CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
+                    }
 
-                is UiState.Success -> {
-                    val exchanges = uiState.data
-                    LazyColumn(
-                        modifier = Modifier.fillMaxSize(),
-                        contentPadding = PaddingValues(bottom = DSSpacing.xxxl)
-                    ) {
-                        items(items = exchanges, key = { it.exchangeId }) { exchange ->
-                            val iconUrl = iconMap[exchange.exchangeId] ?: BuildConfig.DEFAULT_ICON_URL
-                            val model = exchange.toCardModel()
+                    is UiState.Success -> {
+                        val exchanges = uiState.data
+                        LazyColumn(
+                            modifier = Modifier.fillMaxSize(),
+                            contentPadding = PaddingValues(bottom = DSSpacing.xxxl)
+                        ) {
+                            items(items = exchanges, key = { it.exchangeId }) { exchange ->
+                                val iconUrl =
+                                    iconMap[exchange.exchangeId] ?: BuildConfig.DEFAULT_ICON_URL
+                                val model = exchange.toCardModel()
 
 
-                            DSExchangeCardComponent(
-                                name = model.name,
-                                id = model.id,
-                                volume = model.volume,
-                                iconUrl = iconUrl,
-                                onClick = { onExchangeClick(model.id, iconUrl) },
-                                modifier = Modifier
-                                    .padding(horizontal = DSSpacing.md)
-                                    .animateItem(
-                                        fadeInSpec = androidx.compose.animation.core.tween(300),
-                                        fadeOutSpec = androidx.compose.animation.core.tween(300),
-                                    )
-                            )
+                                DSExchangeCardComponent(
+                                    name = model.name,
+                                    id = model.id,
+                                    volume = model.volume,
+                                    iconUrl = iconUrl,
+                                    onClick = { onExchangeClick(model.id, iconUrl) },
+                                    modifier = Modifier
+                                        .padding(horizontal = DSSpacing.md)
+                                        .animateItem(
+                                            fadeInSpec = tween(300),
+                                            fadeOutSpec = tween(300),
+                                        )
+                                )
 
+                            }
                         }
                     }
-                }
 
-                is UiState.Error -> {
-                    ErrorBox(
-                        title = "Oops! Something went wrong.",
-                        message = uiState.message,
-                        onRetry = onRetryClick
-                    )
+                    is UiState.Error -> {
+                        ErrorBox(
+                            title = "Oops! Something went wrong.",
+                            message = uiState.message,
+                            onRetry = onRetryClick
+                        )
+                    }
                 }
             }
         }
