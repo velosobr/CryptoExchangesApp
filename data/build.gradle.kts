@@ -53,7 +53,8 @@ dependencies {
     implementation(libs.koin.core)
     implementation(libs.androidx.datastore.preferences)
     implementation(libs.kotlinx.serialization.json)
-
+    debugImplementation(libs.flipper)
+    debugImplementation(libs.flipper.network)
     ksp(libs.moshi.codegen)
     testImplementation(libs.junit)
     testImplementation(libs.mockk)

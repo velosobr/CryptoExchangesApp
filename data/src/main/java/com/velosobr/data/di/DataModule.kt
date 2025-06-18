@@ -1,5 +1,7 @@
 package com.velosobr.data.di
 
+import com.facebook.flipper.plugins.network.FlipperOkhttpInterceptor
+import com.facebook.flipper.plugins.network.NetworkFlipperPlugin
 import com.velosobr.cryptoexchangesapp.data.BuildConfig
 import com.velosobr.data.remote.api.ExchangeApiService
 import com.velosobr.data.remote.interceptor.LoggingInterceptor
@@ -10,13 +12,21 @@ import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 
 val dataModule = module {
-    factory {
+
+    single<NetworkFlipperPlugin> {
+        check(BuildConfig.DEBUG) { "NetworkFlipperPlugin só deve ser injetado no modo DEBUG" }
+        NetworkFlipperPlugin()
+    }
+
+    single {
         OkHttpClient.Builder().apply {
             if (BuildConfig.DEBUG) {
                 addInterceptor(LoggingInterceptor())
+                addNetworkInterceptor(FlipperOkhttpInterceptor(get()))
             }
         }.build()
     }
+
     single {
         Retrofit.Builder()
             .baseUrl("https://rest.coinapi.io/")

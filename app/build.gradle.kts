@@ -35,6 +35,7 @@ android {
                 "proguard-rules.pro"
             )
             buildConfigField("String", "API_KEY", "\"$coinApiKey\"")
+            signingConfig = signingConfigs.getByName("debug")
 
         }
         debug {
@@ -109,6 +110,11 @@ dependencies {
 
     //Log
     implementation(libs.timber)
+
+    debugImplementation(libs.flipper)
+    debugImplementation(libs.flipper.network)
+    debugImplementation(libs.flipper.leakcanary)
+    debugImplementation(libs.soloader)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
